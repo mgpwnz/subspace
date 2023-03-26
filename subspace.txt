@@ -3,7 +3,7 @@
 назва ноди
 розмір плоту
 За замовчуванням встановлюється нода з портами 32333 32433 32533
-. <(wget -qO- https://raw.githubusercontent.com/mgpwnz/VS/main/subspace_docker.sh)
+. <(wget -qO- https://raw.githubusercontent.com/mgpwnz/subspace/main/subspace_docker.sh)
 суфікс видалення  -un
 Встановлення 2 ноди на порти 34333 34433 34533
 суфікс -in2
@@ -15,4 +15,4 @@
 -un3
 
 
-. <(wget -qO- https://raw.githubusercontent.com/mgpwnz/VS/main/subspace_cli.sh)
+. <(wget -qO- https://raw.githubusercontent.com/mgpwnz/subspace/main/subspace_cli.sh)
