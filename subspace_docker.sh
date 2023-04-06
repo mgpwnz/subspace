@@ -147,7 +147,8 @@ multi() {
 cd $HOME
 #create config multi
 		read -p "Enter quantity: " MNODE
-		echo 'export MNODE='$MNODE 
+		echo 'export MNODE='$MNODE  >> $HOME/.bash_profile
+    . $HOME/.bash_profile
 while [ $MNODE -gt 1 ]
 do
 # var
@@ -240,23 +241,19 @@ sudo rm -rf $HOME/subspace
 echo "Done"
 cd
 }
-uninstall2() {
-cd $HOME/subspace2
+uninstallall() {
+while [ $MNODE -gt 1 ]
+do
+cd $HOME/subspace$MNODE
 docker compose down -v
-sudo rm -rf $HOME/subspace2
+sudo rm -rf $HOME/subspace$MNODE
 cd 
-echo "Done"
+echo "Remote node $MNODE"
 cd
-}
-uninstall3() {
-cd $HOME/subspace3
-docker compose down -v
-sudo rm -rf $HOME/subspace3 
-cd
-echo "Done"
-cd
+MNODE=$[ $MNODE - 1 ]
+done
 }
 # Actions
-sudo apt install tmux wget -y &>/dev/null
+sudo apt install wget -y &>/dev/null
 cd
 $function
