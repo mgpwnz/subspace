@@ -146,7 +146,7 @@ multi() {
 cd $HOME
 #create config multi
 		read -p "Enter quantity: " MNODE
-		echo 'export MNODE='$MNODE >> $HOME/.bash_profile
+		echo 'export QNODE='$MNODE >> $HOME/.bash_profile
 while [ $MNODE -gt 1 ]
 do
 # var
@@ -172,16 +172,16 @@ fi
 MNODE=$[ $MNODE - 1 ]
 done
 #create catalog and config
-while [ $MNODE -gt 1 ]
+while [ $QNODE -gt 1 ]
 do
 #create dir and config
-if [ ! -d $HOME/subspace$MNODE ]; then
-mkdir $HOME/subspace$MNODE
+if [ ! -d $HOME/subspace$QNODE ]; then
+mkdir $HOME/subspace$QNODE
 fi
-cd $HOME/subspace$MNODE
+cd $HOME/subspace$QNODE
 sleep 1
  # Create script 
- tee $HOME/subspace$MNODE/docker-compose.yml > /dev/null <<EOF
+ tee $HOME/subspace$QNODE/docker-compose.yml > /dev/null <<EOF
   version: "3.7"
   services:
     node:
@@ -189,8 +189,8 @@ sleep 1
       volumes:
         - node-data:/var/subspace:rw
       ports:
-        - "0.0.0.0:3${MNODE}333:3${MNODE}333"
-        - "0.0.0.0:3${MNODE}433:3${MNODE}433"
+        - "0.0.0.0:3${QNODE}333:3${QNODE}333"
+        - "0.0.0.0:3${QNODE}433:3${QNODE}433"
       restart: unless-stopped
       command: [
         "--chain", "gemini-3c",
@@ -198,7 +198,7 @@ sleep 1
         "--execution", "wasm",
         "--blocks-pruning", "archive",
         "--state-pruning", "archive",
-        "--port", "3${MNODE}333",
+        "--port", "3${QNODE}333",
         "--dsn-listen-on", "/ip4/0.0.0.0/tcp/34433",
         "--rpc-cors", "all",
         "--rpc-methods", "safe",
@@ -206,7 +206,7 @@ sleep 1
         "--dsn-disable-private-ips",
         "--no-private-ipv4",
         "--validator",
-        "--name", "$SUBSPACE_NODE_NAME$MNODE"
+        "--name", "$SUBSPACE_NODE_NAME$QNODE"
       ]
       healthcheck:
         timeout: 5s
@@ -221,16 +221,16 @@ sleep 1
       volumes:
         - farmer-data:/var/subspace:rw
       ports:
-        - "0.0.0.0:3${MNODE}533:3${MNODE}533"
+        - "0.0.0.0:3${QNODE}533:3${QNODE}533"
       restart: unless-stopped
       command: [
         "--base-path", "/var/subspace",
         "farm",
         "--disable-private-ips",
         "--node-rpc-url", "ws://node:9944",
-        "--listen-on", "/ip4/0.0.0.0/tcp/3${MNODE}533",
-        "--reward-address", "$SUBSPACE_WALLET_ADDRESS$MNODE",
-        "--plot-size", "$SUBSPACE_PLOT_SIZE$MNODE"
+        "--listen-on", "/ip4/0.0.0.0/tcp/3${QNODE}533",
+        "--reward-address", "$SUBSPACE_WALLET_ADDRESS$QNODE",
+        "--plot-size", "$SUBSPACE_PLOT_SIZE$QNODE"
       ]
   volumes:
     node-data:
@@ -239,7 +239,7 @@ EOF
 sleep 2
 #docker run
 docker compose up -d
-MNODE=$[ $MNODE - 1 ]
+QNODE=$[ $QNODE - 1 ]
 done
 cd $HOME
 }
