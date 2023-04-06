@@ -146,7 +146,7 @@ multi() {
 cd $HOME
 #create config multi
 		read -p "Enter quantity: " MNODE
-		echo 'export MNODE='$MNODE 
+		echo 'export MNODE='$MNODE >> $HOME/.bash_profile
 while [ $MNODE -gt 1 ]
 do
 # var
@@ -171,7 +171,76 @@ fi
 . $HOME/.bash_profile
 MNODE=$[ $MNODE - 1 ]
 done
+#create catalog and config
+while [ $MNODE -gt 1 ]
+do
+#create dir and config
+if [ ! -d $HOME/subspace$MNODE ]; then
+mkdir $HOME/subspace$MNODE
+fi
+cd $HOME/subspace$MNODE
+sleep 1
+ # Create script 
+ tee $HOME/subspace$MNODE/docker-compose.yml > /dev/null <<EOF
+  version: "3.7"
+  services:
+    node:
+      image: ghcr.io/subspace/node:$version
+      volumes:
+        - node-data:/var/subspace:rw
+      ports:
+        - "0.0.0.0:3${MNODE}333:3${MNODE}333"
+        - "0.0.0.0:3${MNODE}433:3${MNODE}433"
+      restart: unless-stopped
+      command: [
+        "--chain", "gemini-3c",
+        "--base-path", "/var/subspace",
+        "--execution", "wasm",
+        "--blocks-pruning", "archive",
+        "--state-pruning", "archive",
+        "--port", "3${MNODE}333",
+        "--dsn-listen-on", "/ip4/0.0.0.0/tcp/34433",
+        "--rpc-cors", "all",
+        "--rpc-methods", "safe",
+        "--unsafe-ws-external",
+        "--dsn-disable-private-ips",
+        "--no-private-ipv4",
+        "--validator",
+        "--name", "$SUBSPACE_NODE_NAME$MNODE"
+      ]
+      healthcheck:
+        timeout: 5s
+        interval: 30s
+        retries: 5
 
+    farmer:
+      depends_on:
+        node:
+          condition: service_healthy
+      image: ghcr.io/subspace/farmer:$version
+      volumes:
+        - farmer-data:/var/subspace:rw
+      ports:
+        - "0.0.0.0:3${MNODE}533:3${MNODE}533"
+      restart: unless-stopped
+      command: [
+        "--base-path", "/var/subspace",
+        "farm",
+        "--disable-private-ips",
+        "--node-rpc-url", "ws://node:9944",
+        "--listen-on", "/ip4/0.0.0.0/tcp/3${MNODE}533",
+        "--reward-address", "$SUBSPACE_WALLET_ADDRESS$MNODE",
+        "--plot-size", "$SUBSPACE_PLOT_SIZE$MNODE"
+      ]
+  volumes:
+    node-data:
+    farmer-data:
+EOF
+sleep 2
+#docker run
+docker compose up -d
+MNODE=$[ $MNODE - 1 ]
+done
 cd $HOME
 }
 
