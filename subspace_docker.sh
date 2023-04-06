@@ -224,6 +224,9 @@ sleep 1
 EOF
 . $HOME/.bash_profile
 echo Create config node $MNODE
+#docker run
+docker compose up -d
+echo NODA ZAPUSHENA
 MNODE=$[ $MNODE - 1 ]
 done
 
