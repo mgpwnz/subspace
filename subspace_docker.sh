@@ -242,6 +242,7 @@ if [ ! $qty ]; then
 echo 'export qty='$MNODE >> $HOME/.bash_profile
 fi
 . $HOME/.bash_profile
+echo Create config node $MNODE
 MNODE=$[ $MNODE - 1 ]
 done
 
