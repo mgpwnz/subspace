@@ -146,7 +146,9 @@ multi() {
 cd $HOME
 #create config multi
 		read -p "Enter quantity: " MNODE
-		echo 'export QNODE='$MNODE >> $HOME/.bash_profile
+		echo 'export MNODE='$MNODE >> $HOME/.bash_profile
+#var
+QNODE=$MNODE
 while [ $MNODE -gt 1 ]
 do
 # var
