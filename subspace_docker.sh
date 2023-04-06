@@ -160,7 +160,7 @@ if [ ! $SUBSPACE_WALLET_ADDRESS ]; then
 	fi
 #SUBSPACE_NODE_NAME
 if [ ! $SUBSPACE_NODE_NAME ]; then
-		read -p "Enter node name${MNODE}: " SUBSPACE_NODE_NAME
+		read -p "Enter node name$MNODE: " SUBSPACE_NODE_NAME
 		echo 'export SUBSPACE_NODE_NAME='$SUBSPACE_NODE_NAME >> $HOME/.bash_profile
 	fi
 #SUBSPACE_PLOT_SIZE
