@@ -150,101 +150,27 @@ cd $HOME
 while [ $MNODE -gt 1 ]
 do
 # var
-SUBSPACE_WALLET_ADDRESS=$(SUBSPACE_WALLET_ADDRESS$MNODE)
-SUBSPACE_NODE_NAME=$(SUBSPACE_NODE_NAME$MNODE)
-SUBSPACE_PLOT_SIZE=$(SUBSPACE_PLOT_SIZE$MNODE)
 #SUBSPACE_WALLET_ADDRESS
 if [ ! $SUBSPACE_WALLET_ADDRESS ]; then
 		read -p "Enter wallet $MNODE: " SUBSPACE_WALLET_ADDRESS
-		echo 'export SUBSPACE_WALLET_ADDRESS='${SUBSPACE_WALLET_ADDRESS} >> $HOME/.bash_profile 
+		echo 'export SUBSPACE_WALLET_ADDRESS='${SUBSPACE_WALLET_ADDRESS$(MNODE)} >> $HOME/.bash_profile 
 	fi
 #SUBSPACE_NODE_NAME
 if [ ! $SUBSPACE_NODE_NAME ]; then
 		read -p "Enter node name$MNODE: " SUBSPACE_NODE_NAME
-		echo 'export SUBSPACE_NODE_NAME='$SUBSPACE_NODE_NAME >> $HOME/.bash_profile
+		echo 'export SUBSPACE_NODE_NAME='$SUBSPACE_NODE_NAME$(MNODE) >> $HOME/.bash_profile
 	fi
 #SUBSPACE_PLOT_SIZE
 if [ ! $SUBSPACE_PLOT_SIZE ]; then
 		read -p "Enter plot size 50-100G: " SUBSPACE_PLOT_SIZE
-		echo 'export SUBSPACE_PLOT_SIZE='$SUBSPACE_PLOT_SIZE >> $HOME/.bash_profile
+		echo 'export SUBSPACE_PLOT_SIZE='$SUBSPACE_PLOT_SIZE$(MNODE) >> $HOME/.bash_profile
 	fi
-qty=$(qty$MNODE)
+qty=$(MNODE)
 echo 'export qty='$qty >> $HOME/.bash_profile
 . $HOME/.bash_profile
 MNODE=$[ $MNODE - 1 ]
 done
 
-while [ $qty -gt 1 ]
-do
-#version
-#local subspace_version=`wget -qO- https://api.github.com/repos/subspace/subspace/releases/latest | jq -r ".tag_name"`
-#create dir and config
-if [ ! -d $HOME/subspace${qty} ]; then
-mkdir $HOME/subspace${qty}
-fi
-cd $HOME/subspace${qty}
-sleep 1
- # Create script 
- tee $HOME/subspace${qty}/docker-compose.yml > /dev/null <<EOF
-  version: "3.7"
-  services:
-    node:
-      image: ghcr.io/subspace/node:$version
-      volumes:
-        - node-data:/var/subspace:rw
-      ports:
-        - "0.0.0.0:3${qty}333:3${qty}333"
-        - "0.0.0.0:3${qty}433:3${qty}433"
-      restart: unless-stopped
-      command: [
-        "--chain", "gemini-3c",
-        "--base-path", "/var/subspace",
-        "--execution", "wasm",
-        "--blocks-pruning", "archive",
-        "--state-pruning", "archive",
-        "--port", "3${qty}333",
-        "--dsn-listen-on", "/ip4/0.0.0.0/tcp/34433",
-        "--rpc-cors", "all",
-        "--rpc-methods", "safe",
-        "--unsafe-ws-external",
-        "--dsn-disable-private-ips",
-        "--no-private-ipv4",
-        "--validator",
-        "--name", "$SUBSPACE_NODE_NAME"
-      ]
-      healthcheck:
-        timeout: 5s
-        interval: 30s
-        retries: 5
-
-    farmer:
-      depends_on:
-        node:
-          condition: service_healthy
-      image: ghcr.io/subspace/farmer:$version
-      volumes:
-        - farmer-data:/var/subspace:rw
-      ports:
-        - "0.0.0.0:3${qty}533:3${qty}533"
-      restart: unless-stopped
-      command: [
-        "--base-path", "/var/subspace",
-        "farm",
-        "--disable-private-ips",
-        "--node-rpc-url", "ws://node:9944",
-        "--listen-on", "/ip4/0.0.0.0/tcp/3${qty}533",
-        "--reward-address", "$SUBSPACE_WALLET_ADDRESS",
-        "--plot-size", "$SUBSPACE_PLOT_SIZE"
-      ]
-  volumes:
-    node-data:
-    farmer-data:
-EOF
-sleep 2
-#docker run
-docker compose up -d
-qty=$[ $qty - 1 ]
-done
 cd $HOME
 }
 
