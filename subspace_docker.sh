@@ -150,9 +150,9 @@ cd $HOME
 while [ $MNODE -gt 0 ]
 do
 #SUBSPACE_WALLET_ADDRESS
-if [ ! ${SUBSPACE_WALLET_ADDRESS{$MNODE}} ]; then
-		read -p "Enter wallet address${MNODE}: " SUBSPACE_WALLET_ADDRESS${MNODE}
-		echo 'export SUBSPACE_WALLET_ADDRESS${MNODE}='${SUBSPACE_WALLET_ADDRESS{$MNODE}} >> $HOME/.bash_profile
+if [ ! ${SUBSPACE_WALLET_ADDRESS${MNODE}} ]; then
+		read -p "Enter wallet${MNODE}: " SUBSPACE_WALLET_ADDRESS${MNODE}
+		echo 'export SUBSPACE_WALLET_ADDRESS${MNODE}='${SUBSPACE_WALLET_ADDRESS${MNODE}} >> $HOME/.bash_profile
 	fi
 #SUBSPACE_NODE_NAME
 if [ ! ${SUBSPACE_NODE_NAME${MNODE}} ]; then
