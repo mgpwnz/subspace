@@ -151,16 +151,23 @@ while [ $MNODE -gt 1 ]
 do
 # var
 #SUBSPACE_WALLET_ADDRESS
+if [ ! $SUBSPACE_WALLET_ADDRESS$MNODE ]; then
 		read -p "Enter wallet $MNODE: " SUBSPACE_WALLET_ADDRESS
 		echo 'export SUBSPACE_WALLET_ADDRESS'$MNODE=${SUBSPACE_WALLET_ADDRESS} >> $HOME/.bash_profile 
+fi
 #SUBSPACE_NODE_NAME
+if [ ! $SUBSPACE_NODE_NAME$MNODE ]; then
 		read -p "Enter node name$MNODE: " SUBSPACE_NODE_NAME
 		echo 'export SUBSPACE_NODE_NAME'$MNODE=$SUBSPACE_NODE_NAME >> $HOME/.bash_profile
+fi
 #SUBSPACE_PLOT_SIZE
+if [ ! $SUBSPACE_PLOT_SIZE ]; then
 		read -p "Enter plot size 50-100G: " SUBSPACE_PLOT_SIZE
 		echo 'export SUBSPACE_PLOT_SIZE'$MNODE=$SUBSPACE_PLOT_SIZE >> $HOME/.bash_profile
-
+fi
+if [ ! $qty ]; then
 echo 'export qty='$MNODE >> $HOME/.bash_profile
+fi
 . $HOME/.bash_profile
 MNODE=$[ $MNODE - 1 ]
 done
