@@ -148,7 +148,6 @@ cd $HOME
 #create config multi
 		read -p "Enter quantity: " MNODE
 		echo 'export MNODE='$MNODE  >> $HOME/.bash_profile
-    . $HOME/.bash_profile
 while [ $MNODE -gt 1 ]
 do
 # var
@@ -230,7 +229,7 @@ docker compose up -d
 echo NODA ZAPUSHENA
 MNODE=$[ $MNODE - 1 ]
 done
-
+. $HOME/.bash_profile
 cd $HOME
 }
 
