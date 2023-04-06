@@ -160,8 +160,7 @@ do
 		read -p "Enter plot size 50-100G: " SUBSPACE_PLOT_SIZE
 		echo 'export SUBSPACE_PLOT_SIZE$MNODE='$SUBSPACE_PLOT_SIZE >> $HOME/.bash_profile
 
-qty=$(MNODE)
-echo 'export qty='$qty >> $HOME/.bash_profile
+echo 'export qty='$MNODE >> $HOME/.bash_profile
 . $HOME/.bash_profile
 MNODE=$[ $MNODE - 1 ]
 done
