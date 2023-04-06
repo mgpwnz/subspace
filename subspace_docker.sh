@@ -166,7 +166,6 @@ mkdir $HOME/subspace$MNODE
 fi
 cd $HOME/subspace$MNODE
 sleep 1
-SUBSPACE_NODE_NAME=$SUBSPACE_NODE_NAME$MNODE
  # Create script 
  tee $HOME/subspace$MNODE/docker-compose.yml > /dev/null <<EOF
   version: "3.7"
