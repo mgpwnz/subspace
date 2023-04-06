@@ -152,13 +152,13 @@ do
 # var
 #SUBSPACE_WALLET_ADDRESS
 		read -p "Enter wallet $MNODE: " SUBSPACE_WALLET_ADDRESS
-		echo 'export SUBSPACE_WALLET_ADDRESS$(MNODE)='${SUBSPACE_WALLET_ADDRESS} >> $HOME/.bash_profile 
+		echo 'export SUBSPACE_WALLET_ADDRESS$MNODE='${SUBSPACE_WALLET_ADDRESS} >> $HOME/.bash_profile 
 #SUBSPACE_NODE_NAME
 		read -p "Enter node name$MNODE: " SUBSPACE_NODE_NAME
-		echo 'export SUBSPACE_NODE_NAME$(MNODE)='$SUBSPACE_NODE_NAME >> $HOME/.bash_profile
+		echo 'export SUBSPACE_NODE_NAME$MNODE='$SUBSPACE_NODE_NAME >> $HOME/.bash_profile
 #SUBSPACE_PLOT_SIZE
 		read -p "Enter plot size 50-100G: " SUBSPACE_PLOT_SIZE
-		echo 'export SUBSPACE_PLOT_SIZE$(MNODE)='$SUBSPACE_PLOT_SIZE >> $HOME/.bash_profile
+		echo 'export SUBSPACE_PLOT_SIZE$MNODE='$SUBSPACE_PLOT_SIZE >> $HOME/.bash_profile
 
 qty=$(MNODE)
 echo 'export qty='$qty >> $HOME/.bash_profile
