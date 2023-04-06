@@ -172,6 +172,9 @@ mkdir $HOME/subspace$MNODE
 fi
 cd $HOME/subspace$MNODE
 sleep 1
+SUBSPACE_NAME=$($SUBSPACE_NODE_NAME\$MNODE)
+SUBSPACE_WALLET=$($SUBSPACE_WALLET_ADDRESS\$MNODE)
+SUBSPACE_PLOT=$($SUBSPACE_PLOT_SIZE\$MNODE)
  # Create script 
  tee $HOME/subspace$MNODE/docker-compose.yml > /dev/null <<EOF
   version: "3.7"
@@ -198,7 +201,7 @@ sleep 1
         "--dsn-disable-private-ips",
         "--no-private-ipv4",
         "--validator",
-        "--name", "$SUBSPACE_NODE_NAME $MNODE"
+        "--name", "$SUBSPACE_NAME"
       ]
       healthcheck:
         timeout: 5s
@@ -221,8 +224,8 @@ sleep 1
         "--disable-private-ips",
         "--node-rpc-url", "ws://node:9944",
         "--listen-on", "/ip4/0.0.0.0/tcp/3${MNODE}533",
-        "--reward-address", "$SUBSPACE_WALLET_ADDRESS $MNODE",
-        "--plot-size", "$SUBSPACE_PLOT_SIZE $MNODE"
+        "--reward-address", "$SUBSPACE_WALLET",
+        "--plot-size", "$SUBSPACE_PLOT"
       ]
   volumes:
     node-data:
