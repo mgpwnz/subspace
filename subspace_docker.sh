@@ -150,19 +150,22 @@ cd $HOME
 while [ $MNODE -gt 0 ]
 do
 #SUBSPACE_WALLET_ADDRESS
-if [ ! ${SUBSPACE_WALLET_ADDRESS${MNODE}} ]; then
-		read -p "Enter wallet${MNODE}: " SUBSPACE_WALLET_ADDRESS${MNODE}
-		echo 'export SUBSPACE_WALLET_ADDRESS${MNODE}='${SUBSPACE_WALLET_ADDRESS${MNODE}} >> $HOME/.bash_profile
+SUBSPACE_NODE_NAME=SUBSPACE_WALLET_ADDRESS$MNODE
+if [ ! $SUBSPACE_WALLET_ADDRESS ]; then
+		read -p "Enter wallet $MNODE: " SUBSPACE_WALLET_ADDRESS
+		echo 'export SUBSPACE_WALLET_ADDRESS='$SUBSPACE_WALLET_ADDRESS >> $HOME/.bash_profile
 	fi
 #SUBSPACE_NODE_NAME
-if [ ! ${SUBSPACE_NODE_NAME${MNODE}} ]; then
-		read -p "Enter node name${MNODE}: " SUBSPACE_NODE_NAME${MNODE}
-		echo 'export SUBSPACE_NODE_NAME${MNODE}='${SUBSPACE_NODE_NAME${MNODE}} >> $HOME/.bash_profile
+SUBSPACE_NODE_NAME=SUBSPACE_NODE_NAME$MNODE
+if [ ! $SUBSPACE_NODE_NAME ]; then
+		read -p "Enter node name${MNODE}: " SUBSPACE_NODE_NAME
+		echo 'export SUBSPACE_NODE_NAME='$SUBSPACE_NODE_NAME >> $HOME/.bash_profile
 	fi
 #SUBSPACE_PLOT_SIZE
-if [ ! ${SUBSPACE_PLOT_SIZE${MNODE}} ]; then
-		read -p "Enter plot size 50-100G: " SUBSPACE_PLOT_SIZE${MNODE}
-		echo 'export SUBSPACE_PLOT_SIZE${MNODE}='${SUBSPACE_PLOT_SIZE${MNODE}} >> $HOME/.bash_profile
+SUBSPACE_PLOT_SIZE=SUBSPACE_PLOT_SIZE$MNODE
+if [ ! $SUBSPACE_PLOT_SIZE ]; then
+		read -p "Enter plot size 50-100G: " SUBSPACE_PLOT_SIZE
+		echo 'export SUBSPACE_PLOT_SIZE='$SUBSPACE_PLOT_SIZE >> $HOME/.bash_profile
 	fi
 #version
 #local subspace_version=`wget -qO- https://api.github.com/repos/subspace/subspace/releases/latest | jq -r ".tag_name"`
@@ -198,7 +201,7 @@ sleep 1
         "--dsn-disable-private-ips",
         "--no-private-ipv4",
         "--validator",
-        "--name", "${SUBSPACE_NODE_NAME${MNODE}}"
+        "--name", "$SUBSPACE_NODE_NAME"
       ]
       healthcheck:
         timeout: 5s
@@ -221,8 +224,8 @@ sleep 1
         "--disable-private-ips",
         "--node-rpc-url", "ws://node:9944",
         "--listen-on", "/ip4/0.0.0.0/tcp/3${MNODE}533",
-        "--reward-address", "${SUBSPACE_WALLET_ADDRESS${MNODE}}",
-        "--plot-size", "${SUBSPACE_PLOT_SIZE${MNODE}}"
+        "--reward-address", "$SUBSPACE_WALLET_ADDRESS",
+        "--plot-size", "$SUBSPACE_PLOT_SIZE"
       ]
   volumes:
     node-data:
