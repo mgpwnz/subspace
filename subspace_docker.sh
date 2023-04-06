@@ -150,23 +150,23 @@ cd $HOME
 while [ $MNODE -gt 1 ]
 do
 # var
-SUBSPACE_WALLET_NAME=$(SUBSPACE_WALLET_ADDRESS$MNODE)
+SUBSPACE_WALLET_ADDRESS=$(SUBSPACE_WALLET_ADDRESS$MNODE)
 SUBSPACE_NODE_NAME=$(SUBSPACE_NODE_NAME$MNODE)
 SUBSPACE_PLOT_SIZE=$(SUBSPACE_PLOT_SIZE$MNODE)
 #SUBSPACE_WALLET_ADDRESS
 if [ ! $SUBSPACE_WALLET_ADDRESS ]; then
 		read -p "Enter wallet $MNODE: " SUBSPACE_WALLET_ADDRESS
-		echo 'export SUBSPACE_WALLET_ADDRESS='$SUBSPACE_WALLET_ADDRESS >> $HOME/.bash_profile
+		echo 'export SUBSPACE_WALLET_ADDRESS='$SUBSPACE_WALLET_ADDRESS 
 	fi
 #SUBSPACE_NODE_NAME
 if [ ! $SUBSPACE_NODE_NAME ]; then
 		read -p "Enter node name$MNODE: " SUBSPACE_NODE_NAME
-		echo 'export SUBSPACE_NODE_NAME='$SUBSPACE_NODE_NAME >> $HOME/.bash_profile
+		echo 'export SUBSPACE_NODE_NAME='$SUBSPACE_NODE_NAME 
 	fi
 #SUBSPACE_PLOT_SIZE
 if [ ! $SUBSPACE_PLOT_SIZE ]; then
 		read -p "Enter plot size 50-100G: " SUBSPACE_PLOT_SIZE
-		echo 'export SUBSPACE_PLOT_SIZE='$SUBSPACE_PLOT_SIZE >> $HOME/.bash_profile
+		echo 'export SUBSPACE_PLOT_SIZE='$SUBSPACE_PLOT_SIZE 
 	fi
 #version
 #local subspace_version=`wget -qO- https://api.github.com/repos/subspace/subspace/releases/latest | jq -r ".tag_name"`
@@ -237,6 +237,7 @@ sleep 2
 docker compose up -d
 MNODE=$[ $MNODE - 1 ]
 done
+cd $HOME
 }
 
 uninstall() {
