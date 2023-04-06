@@ -147,7 +147,7 @@ multi() {
 cd $HOME
 #create config multi
 		read -p "Enter quantity: " MNODE
-		echo 'export MNODE='$MNODE  >> $HOME/.bash_profile
+		echo 'export MNODE='$MNODE  
 while [ $MNODE -gt 1 ]
 do
 # var
@@ -229,7 +229,6 @@ docker compose up -d
 echo NODA ZAPUSHENA
 MNODE=$[ $MNODE - 1 ]
 done
-. $HOME/.bash_profile
 cd $HOME
 }
 
@@ -241,6 +240,9 @@ echo "Done"
 cd
 }
 uninstallall() {
+#create config multi
+		read -p "Enter quantity delete: " MNODE
+		echo 'export MNODE='$MNODE
 while [ $MNODE -gt 1 ]
 do
 cd $HOME/subspace$MNODE
