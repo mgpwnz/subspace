@@ -221,7 +221,7 @@ sleep 1
         "--disable-private-ips",
         "--node-rpc-url", "ws://node:9944",
         "--listen-on", "/ip4/0.0.0.0/tcp/3${MNODE}533",
-        "--reward-address", "${SUBSPACE_WALLET_ADDRESS $MNODE}",
+        "--reward-address", "$SUBSPACE_WALLET_ADDRESS $MNODE",
         "--plot-size", "$SUBSPACE_PLOT_SIZE $MNODE"
       ]
   volumes:
