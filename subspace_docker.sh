@@ -142,6 +142,17 @@ sleep 2
 docker compose up -d && docker compose logs -f --tail 1000
 
 }
+
+
+
+
+
+
+
+
+
+
+
 multi() {
 cd $HOME
 #create config multi
@@ -173,7 +184,10 @@ fi
 . $HOME/.bash_profile
 MNODE=$[ $MNODE - 1 ]
 done
-#create catalog and config
+###########################
+#create catalog and config#
+###########################
+echo $QNODE
 while [ $QNODE -gt 1 ]
 do
 #create dir and config
