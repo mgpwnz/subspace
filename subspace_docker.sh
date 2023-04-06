@@ -198,7 +198,7 @@ sleep 1
         "--dsn-disable-private-ips",
         "--no-private-ipv4",
         "--validator",
-        "--name", "$(SUBSPACE_NODE_NAME$MNODE)"
+        "--name", "${SUBSPACE_NODE_NAME$MNODE}"
       ]
       healthcheck:
         timeout: 5s
@@ -221,16 +221,13 @@ sleep 1
         "--disable-private-ips",
         "--node-rpc-url", "ws://node:9944",
         "--listen-on", "/ip4/0.0.0.0/tcp/3${MNODE}533",
-        "--reward-address", "$(SUBSPACE_WALLET_ADDRESS$MNODE)",
-        "--plot-size", "$(SUBSPACE_PLOT_SIZE$MNODE)"
+        "--reward-address", "${SUBSPACE_WALLET_ADDRESS$MNODE}",
+        "--plot-size", "${SUBSPACE_PLOT_SIZE$MNODE}"
       ]
   volumes:
     node-data:
     farmer-data:
 EOF
-if [ ! $qty ]; then
-echo 'export qty='$MNODE >> $HOME/.bash_profile
-fi
 . $HOME/.bash_profile
 echo Create config node $MNODE
 MNODE=$[ $MNODE - 1 ]
