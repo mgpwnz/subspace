@@ -158,8 +158,6 @@ cd $HOME
 #create config multi
 		read -p "Enter quantity: " MNODE
 		echo 'export MNODE='$MNODE >> $HOME/.bash_profile
-#var
-QNODE=$MNODE
 while [ $MNODE -gt 1 ]
 do
 # var
@@ -178,26 +176,14 @@ if [ ! $SUBSPACE_PLOT_SIZE ]; then
 		read -p "Enter plot size 50-100G: " SUBSPACE_PLOT_SIZE
 		echo 'export SUBSPACE_PLOT_SIZE'$MNODE=$SUBSPACE_PLOT_SIZE >> $HOME/.bash_profile
 fi
-if [ ! $qty ]; then
-echo 'export qty='$MNODE >> $HOME/.bash_profile
-fi
-. $HOME/.bash_profile
-MNODE=$[ $MNODE - 1 ]
-done
-###########################
-#create catalog and config#
-###########################
-echo $QNODE
-while [ $QNODE -gt 1 ]
-do
 #create dir and config
-if [ ! -d $HOME/subspace$QNODE ]; then
-mkdir $HOME/subspace$QNODE
+if [ ! -d $HOME/subspace$MNODE ]; then
+mkdir $HOME/subspace$MNODE
 fi
-cd $HOME/subspace$QNODE
+cd $HOME/subspace$MNODE
 sleep 1
  # Create script 
- tee $HOME/subspace$QNODE/docker-compose.yml > /dev/null <<EOF
+ tee $HOME/subspace$MNODE/docker-compose.yml > /dev/null <<EOF
   version: "3.7"
   services:
     node:
@@ -205,8 +191,8 @@ sleep 1
       volumes:
         - node-data:/var/subspace:rw
       ports:
-        - "0.0.0.0:3${QNODE}333:3${QNODE}333"
-        - "0.0.0.0:3${QNODE}433:3${QNODE}433"
+        - "0.0.0.0:3${MNODE}333:3${MNODE}333"
+        - "0.0.0.0:3${MNODE}433:3${MNODE}433"
       restart: unless-stopped
       command: [
         "--chain", "gemini-3c",
@@ -214,7 +200,7 @@ sleep 1
         "--execution", "wasm",
         "--blocks-pruning", "archive",
         "--state-pruning", "archive",
-        "--port", "3${QNODE}333",
+        "--port", "3${MNODE}333",
         "--dsn-listen-on", "/ip4/0.0.0.0/tcp/34433",
         "--rpc-cors", "all",
         "--rpc-methods", "safe",
@@ -222,7 +208,7 @@ sleep 1
         "--dsn-disable-private-ips",
         "--no-private-ipv4",
         "--validator",
-        "--name", "$SUBSPACE_NODE_NAME$QNODE"
+        "--name", "$SUBSPACE_NODE_NAME$MNODE"
       ]
       healthcheck:
         timeout: 5s
@@ -237,26 +223,28 @@ sleep 1
       volumes:
         - farmer-data:/var/subspace:rw
       ports:
-        - "0.0.0.0:3${QNODE}533:3${QNODE}533"
+        - "0.0.0.0:3${MNODE}533:3${MNODE}533"
       restart: unless-stopped
       command: [
         "--base-path", "/var/subspace",
         "farm",
         "--disable-private-ips",
         "--node-rpc-url", "ws://node:9944",
-        "--listen-on", "/ip4/0.0.0.0/tcp/3${QNODE}533",
-        "--reward-address", "$SUBSPACE_WALLET_ADDRESS$QNODE",
-        "--plot-size", "$SUBSPACE_PLOT_SIZE$QNODE"
+        "--listen-on", "/ip4/0.0.0.0/tcp/3${MNODE}533",
+        "--reward-address", "$SUBSPACE_WALLET_ADDRESS$MNODE",
+        "--plot-size", "$SUBSPACE_PLOT_SIZE$MNODE"
       ]
   volumes:
     node-data:
     farmer-data:
 EOF
-sleep 2
-#docker run
-docker compose up -d
-QNODE=$[ $QNODE - 1 ]
+if [ ! $qty ]; then
+echo 'export qty='$MNODE >> $HOME/.bash_profile
+fi
+. $HOME/.bash_profile
+MNODE=$[ $MNODE - 1 ]
 done
+
 cd $HOME
 }
 
