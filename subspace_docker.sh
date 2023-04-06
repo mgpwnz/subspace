@@ -234,7 +234,7 @@ sleep 1
 EOF
 sleep 2
 #docker run
-docker compose up -d && docker compose logs -f --tail 1000
+docker compose up -d
 MNODE=$[ $MNODE - 1 ]
 done
 }
