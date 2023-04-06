@@ -156,28 +156,36 @@ SUBSPACE_PLOT_SIZE=$(SUBSPACE_PLOT_SIZE$MNODE)
 #SUBSPACE_WALLET_ADDRESS
 if [ ! $SUBSPACE_WALLET_ADDRESS ]; then
 		read -p "Enter wallet $MNODE: " SUBSPACE_WALLET_ADDRESS
-		echo 'export SUBSPACE_WALLET_ADDRESS='$SUBSPACE_WALLET_ADDRESS 
+		echo 'export SUBSPACE_WALLET_ADDRESS='${SUBSPACE_WALLET_ADDRESS} >> $HOME/.bash_profile 
 	fi
 #SUBSPACE_NODE_NAME
 if [ ! $SUBSPACE_NODE_NAME ]; then
 		read -p "Enter node name$MNODE: " SUBSPACE_NODE_NAME
-		echo 'export SUBSPACE_NODE_NAME='$SUBSPACE_NODE_NAME 
+		echo 'export SUBSPACE_NODE_NAME='$SUBSPACE_NODE_NAME >> $HOME/.bash_profile
 	fi
 #SUBSPACE_PLOT_SIZE
 if [ ! $SUBSPACE_PLOT_SIZE ]; then
 		read -p "Enter plot size 50-100G: " SUBSPACE_PLOT_SIZE
-		echo 'export SUBSPACE_PLOT_SIZE='$SUBSPACE_PLOT_SIZE 
+		echo 'export SUBSPACE_PLOT_SIZE='$SUBSPACE_PLOT_SIZE >> $HOME/.bash_profile
 	fi
+qty=$(qty$MNODE)
+echo 'export qty='$qty >> $HOME/.bash_profile
+. $HOME/.bash_profile
+MNODE=$[ $MNODE - 1 ]
+done
+
+while [ $qty -gt 1 ]
+do
 #version
 #local subspace_version=`wget -qO- https://api.github.com/repos/subspace/subspace/releases/latest | jq -r ".tag_name"`
 #create dir and config
-if [ ! -d $HOME/subspace${MNODE} ]; then
-mkdir $HOME/subspace${MNODE}
+if [ ! -d $HOME/subspace${qty} ]; then
+mkdir $HOME/subspace${qty}
 fi
-cd $HOME/subspace${MNODE}
+cd $HOME/subspace${qty}
 sleep 1
  # Create script 
- tee $HOME/subspace${MNODE}/docker-compose.yml > /dev/null <<EOF
+ tee $HOME/subspace${qty}/docker-compose.yml > /dev/null <<EOF
   version: "3.7"
   services:
     node:
@@ -185,8 +193,8 @@ sleep 1
       volumes:
         - node-data:/var/subspace:rw
       ports:
-        - "0.0.0.0:3${MNODE}333:3${MNODE}333"
-        - "0.0.0.0:3${MNODE}433:3${MNODE}433"
+        - "0.0.0.0:3${qty}333:3${qty}333"
+        - "0.0.0.0:3${qty}433:3${qty}433"
       restart: unless-stopped
       command: [
         "--chain", "gemini-3c",
@@ -194,7 +202,7 @@ sleep 1
         "--execution", "wasm",
         "--blocks-pruning", "archive",
         "--state-pruning", "archive",
-        "--port", "3${MNODE}333",
+        "--port", "3${qty}333",
         "--dsn-listen-on", "/ip4/0.0.0.0/tcp/34433",
         "--rpc-cors", "all",
         "--rpc-methods", "safe",
@@ -217,14 +225,14 @@ sleep 1
       volumes:
         - farmer-data:/var/subspace:rw
       ports:
-        - "0.0.0.0:3${MNODE}533:3${MNODE}533"
+        - "0.0.0.0:3${qty}533:3${qty}533"
       restart: unless-stopped
       command: [
         "--base-path", "/var/subspace",
         "farm",
         "--disable-private-ips",
         "--node-rpc-url", "ws://node:9944",
-        "--listen-on", "/ip4/0.0.0.0/tcp/3${MNODE}533",
+        "--listen-on", "/ip4/0.0.0.0/tcp/3${qty}533",
         "--reward-address", "$SUBSPACE_WALLET_ADDRESS",
         "--plot-size", "$SUBSPACE_PLOT_SIZE"
       ]
@@ -235,7 +243,7 @@ EOF
 sleep 2
 #docker run
 docker compose up -d
-MNODE=$[ $MNODE - 1 ]
+qty=$[ $qty - 1 ]
 done
 cd $HOME
 }
