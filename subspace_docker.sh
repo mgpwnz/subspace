@@ -147,7 +147,7 @@ cd $HOME
 #create config multi
 		read -p "Enter quantity: " MNODE
 		echo 'export MNODE='$MNODE 
-while [ $MNODE -gt 0 ]
+while [ $MNODE -gt 1 ]
 do
 # var
 SUBSPACE_WALLET_NAME=$(SUBSPACE_WALLET_ADDRESS$MNODE)
