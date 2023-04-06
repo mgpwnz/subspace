@@ -143,21 +143,11 @@ docker compose up -d && docker compose logs -f --tail 1000
 
 }
 
-
-
-
-
-
-
-
-
-
-
 multi() {
 cd $HOME
 #create config multi
 		read -p "Enter quantity: " MNODE
-		echo 'export MNODE='$MNODE >> $HOME/.bash_profile
+		echo 'export MNODE='$MNODE 
 while [ $MNODE -gt 1 ]
 do
 # var
