@@ -305,6 +305,7 @@ if [ -d $HOME/subspace9 ]; then
 		cd $HOME/subspace9 && docker compose down -v && sudo rm -rf $HOME/subspace9
     echo Node 9 delete
 	fi 
+cd
 }
 # Actions
 sudo apt install wget -y &>/dev/null
