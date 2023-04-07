@@ -144,6 +144,32 @@ docker compose up -d && docker compose logs -f --tail 1000
 }
 
 multi() {
+#docker install
+cd
+touch $HOME/.bash_profile
+if ! docker --version; then
+		echo -e "${C_LGn}Docker installation...${RES}"
+		sudo apt update
+		sudo apt upgrade -y
+		sudo apt install curl apt-transport-https ca-certificates gnupg lsb-release -y
+		. /etc/*-release
+		wget -qO- "https://download.docker.com/linux/${DISTRIB_ID,,}/gpg" | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+		echo "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/${DISTRIB_ID,,} ${DISTRIB_CODENAME} stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+		sudo apt update
+		sudo apt install docker-ce docker-ce-cli containerd.io -y
+		docker_version=`apt-cache madison docker-ce | grep -oPm1 "(?<=docker-ce \| )([^_]+)(?= \| https)"`
+		sudo apt install docker-ce="$docker_version" docker-ce-cli="$docker_version" containerd.io -y
+	fi
+	if ! docker-compose --version; then
+		echo -e "${C_LGn}Docker Сompose installation...${RES}"
+		sudo apt update
+		sudo apt upgrade -y
+		sudo apt install wget jq -y
+		local docker_compose_version=`wget -qO- https://api.github.com/repos/docker/compose/releases/latest | jq -r ".tag_name"`
+		sudo wget -O /usr/bin/docker-compose "https://github.com/docker/compose/releases/download/${docker_compose_version}/docker-compose-`uname -s`-`uname -m`"
+		sudo chmod +x /usr/bin/docker-compose
+		. $HOME/.bash_profile
+	fi
 cd $HOME
 #create config multi
 		read -p "Enter quantity: " MNODE
@@ -240,18 +266,45 @@ echo "Done"
 cd
 }
 uninstallall() {
-#create config multi
-		read -p "Enter quantity delete: " RNODE
-		echo 'export MNODE='$RNODE
-while [ $RNODE -gt 1 ]
-do
-cd $HOME/subspace$RNODE
-docker compose down -v
-sudo rm -rf $RNODE/subspace$RNODE
-cd 
-echo "Remote node $MNODE"
-cd
-RNODE=$[ $RNODE - 1 ]
+cd $HOME
+
+if [ -d $HOME/subspace ]; then
+		cd $HOME/subspace && docker compose down -v && sudo rm -rf $HOME/subspace
+    echo Node 1 delete
+	fi
+
+if [ -d $HOME/subspace2 ]; then
+		cd $HOME/subspace2 && docker compose down -v && sudo rm -rf $HOME/subspace2
+    echo Node 2 delete
+	fi
+if [ -d $HOME/subspace3 ]; then
+		cd $HOME/subspace3 && docker compose down -v && sudo rm -rf $HOME/subspace3
+    echo Node 3 delete
+	fi
+if [ -d $HOME/subspace4 ]; then
+		cd $HOME/subspace4 && docker compose down -v && sudo rm -rf $HOME/subspace4
+    echo Node 4 delete
+	fi
+if [ -d $HOME/subspace5 ]; then
+		cd $HOME/subspace5 && docker compose down -v && sudo rm -rf $HOME/subspace5
+    echo Node 5 delete
+	fi
+if [ -d $HOME/subspace6 ]; then
+		cd $HOME/subspace6 && docker compose down -v && sudo rm -rf $HOME/subspace6
+    echo Node 6 delete
+	fi
+ if [ -d $HOME/subspace7]; then
+		cd $HOME/subspace7 && docker compose down -v && sudo rm -rf $HOME/subspace7
+    echo Node 7 delete
+	fi
+if [ -d $HOME/subspace8 ]; then
+		cd $HOME/subspace8 && docker compose down -v && sudo rm -rf $HOME/subspace8
+    echo Node 8 delete
+	fi
+if [ -d $HOME/subspace9 ]; then
+		cd $HOME/subspace9 && docker compose down -v && sudo rm -rf $HOME/subspace9
+    echo Node 9 delete
+	fi 
 done
 }
 # Actions
