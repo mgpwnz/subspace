@@ -226,7 +226,7 @@ EOF
 echo Create config node $MNODE
 #docker run
 docker compose up -d
-echo NODA ZAPUSHENA
+echo NODA №$MNODE ZAPUSHENA
 MNODE=$[ $MNODE - 1 ]
 done
 cd $HOME
@@ -241,17 +241,17 @@ cd
 }
 uninstallall() {
 #create config multi
-		read -p "Enter quantity delete: " MNODE
-		echo 'export MNODE='$MNODE
-while [ $MNODE -gt 1 ]
+		read -p "Enter quantity delete: " RNODE
+		echo 'export MNODE='$RNODE
+while [ $RNODE -gt 1 ]
 do
-cd $HOME/subspace$MNODE
+cd $HOME/subspace$RNODE
 docker compose down -v
-sudo rm -rf $HOME/subspace$MNODE
+sudo rm -rf $RNODE/subspace$RNODE
 cd 
 echo "Remote node $MNODE"
 cd
-MNODE=$[ $MNODE - 1 ]
+RNODE=$[ $RNODE - 1 ]
 done
 }
 # Actions
