@@ -297,7 +297,7 @@ if [ -d $HOME/subspace6 ]; then
     sudo rm -rf $HOME/subspace6
     echo Node 6 delete
 	fi
- if [ -d $HOME/subspace7]; then
+ if [ -d $HOME/subspace7 ]; then
 		cd $HOME/subspace7 && docker compose down -v
     sudo rm -rf $HOME/subspace7
     echo Node 7 delete
