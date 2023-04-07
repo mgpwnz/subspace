@@ -174,7 +174,7 @@ cd $HOME
 #create config multi
 		read -p "Enter quantity: " MNODE
 		echo 'export MNODE='$MNODE  
-while [ $MNODE -gt 1 ]
+while [ $MNODE -gt 0 ]
 do
 # var
 #SUBSPACE_WALLET_ADDRESS
@@ -267,7 +267,7 @@ cd
 }
 uninstallall() {
 cd $HOME
-if [ -d $HOME/subspace ]; then
+if [ -d $HOME/subspace1 ]; then
 		cd $HOME/subspace && docker compose down -v  
     sudo rm -rf $HOME/subspace
     echo Node 1 delete
