@@ -1,8 +1,8 @@
 #!/bin/bash
 # Default variables
 function="install"
-repo=v0.1.12
-version=v3-v0.1.12
+repo=v0.3.1-alpha
+version=v0.3.1-alpha
 installed=$(ls $HOME/subspace | sed -e "s%subspace-cli-ubuntu-x86_64-v%v%")
 # Options
 option_value(){ echo "$1" | sed -e 's%^--[^=]*=%%g; s%^-[^=]*=%%g'; }
