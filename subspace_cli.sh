@@ -3,7 +3,7 @@
 function="install"
 repo=v0.3.1-alpha
 version=v3-v0.3.1-alpha
-installed=$( sudo ls $HOME/subspace | sed -e "s%subspace-cli-ubuntu-x86_64-v%v%")
+installed=$( ls $HOME/subspace | sed -e "s%subspace-cli-ubuntu-x86_64-v%v%")
 # Options
 option_value(){ echo "$1" | sed -e 's%^--[^=]*=%%g; s%^-[^=]*=%%g'; }
 while test $# -gt 0; do
