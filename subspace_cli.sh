@@ -83,9 +83,8 @@ cd
 update() {
 if[ ! -d $HOME/subspace ]; then
  echo Subspace is not install
- else
- installed=$( ls $HOME/subspace | sed -e "s%subspace-cli-ubuntu-x86_64-v%v%" )
- if [[ ${version} != ${installed} ]]; then
+ elif
+ [[ ${version} != ${ ls $HOME/subspace | sed -e "s%subspace-cli-ubuntu-x86_64-v%v%" } ]]; then
  cd $HOME/subspace
  rm subspace-cli-ubuntu*
  #download cli
@@ -100,7 +99,6 @@ if[ ! -d $HOME/subspace ]; then
  cd $HOME
  else
  echo -e "Your subspace node \e[32mlast version\e[39m!"
- fi
 fi
 }
 # Actions

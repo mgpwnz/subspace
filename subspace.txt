@@ -15,4 +15,4 @@
 -un3
 
 
-. <(wget -qO- https://raw.githubusercontent.com/mgpwnz/subspace/main/subspace_cli.sh)
+. <(wget -qO- https://raw.githubusercontent.com/mgpwnz/subspace/desktop/subspace_cli.sh)
