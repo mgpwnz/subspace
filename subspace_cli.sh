@@ -3,7 +3,6 @@
 function="install"
 repo=v0.3.1-alpha
 version=v3-v0.3.1-alpha
-installed=$( ls $HOME/subspace | sed -e "s%subspace-cli-ubuntu-x86_64-v%v%")
 # Options
 option_value(){ echo "$1" | sed -e 's%^--[^=]*=%%g; s%^-[^=]*=%%g'; }
 while test $# -gt 0; do
@@ -82,21 +81,26 @@ echo "Done"
 cd
 }
 update() {
-if [[ ${version} != ${installed} ]]; then
-cd $HOME/subspace
-rm subspace-cli-ubuntu*
-#download cli
-wget https://github.com/subspace/subspace-cli/releases/download/${repo}/subspace-cli-ubuntu-x86_64-${version} && \
-chmod +x subspace-cli-ubuntu-x86_64-${version} && \
-sed -i -e "s/subspace-cli-ubuntu-x86_64-.*/subspace-cli-ubuntu-x86_64-${version} farm  --verbose/g" /etc/systemd/system/subspace.service
-sudo systemctl daemon-reload
-echo -e '\n\e[42mRunning a service\e[0m\n' && sleep 1 
-sudo systemctl enable subspace
-sudo systemctl restart subspace
-echo -e "Your subspace node \e[32mUpdate\e[39m!"
-cd $HOME
-else
-echo -e "Your subspace node \e[32mlast version\e[39m!"
+if[ ! -d $HOME/subspace ]; then
+ echo Subspace is not install
+ else
+ installed=$( ls $HOME/subspace | sed -e "s%subspace-cli-ubuntu-x86_64-v%v%" )
+ if [[ ${version} != ${installed} ]]; then
+ cd $HOME/subspace
+ rm subspace-cli-ubuntu*
+ #download cli
+ wget https://github.com/subspace/subspace-cli/releases/download/${repo}/subspace-cli-ubuntu-x86_64-${version} && \
+ chmod +x subspace-cli-ubuntu-x86_64-${version} && \
+ sed -i -e "s/subspace-cli-ubuntu-x86_64-.*/subspace-cli-ubuntu-x86_64-${version} farm  --verbose/g" /etc/systemd/system/subspace.service
+ sudo systemctl daemon-reload
+ echo -e '\n\e[42mRunning a service\e[0m\n' && sleep 1 
+ sudo systemctl enable subspace
+ sudo systemctl restart subspace
+ echo -e "Your subspace node \e[32mUpdate\e[39m!"
+ cd $HOME
+ else
+ echo -e "Your subspace node \e[32mlast version\e[39m!"
+ fi
 fi
 }
 # Actions
