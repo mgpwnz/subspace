@@ -74,10 +74,10 @@ else
 fi
 }
 uninstall() {
-sudo systemctl disable subspace
-sudo systemctl stop subspace    
-sudo rm -rf $HOME/subspace $HOME/.config/subspace*
-sudo rm -rf $HOME/.local/share/subspace-cli/
+sudo systemctl disable subspace &> /dev/null
+sudo systemctl stop subspace  &> /dev/null  
+sudo rm -rf $HOME/subspace $HOME/.config/subspace* &> /dev/null
+sudo rm -rf $HOME/.local/share/subspace-cli/ &> /dev/null
 echo "Done"
 cd
 }
