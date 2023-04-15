@@ -1,9 +1,9 @@
 #!/bin/bash
 # Default variables
 function="install"
-repo=v0.1.12
-version=v3-v0.1.12
-installed=$(ls $HOME/subspace | sed -e "s%subspace-cli-ubuntu-x86_64-v%v%")
+repo=v0.3.1-alpha
+version=v3-v0.3.1-alpha
+installed=$( ls $HOME/subspace | sed -e "s%subspace-cli-ubuntu-x86_64-v%v%")
 # Options
 option_value(){ echo "$1" | sed -e 's%^--[^=]*=%%g; s%^-[^=]*=%%g'; }
 while test $# -gt 0; do
@@ -74,10 +74,10 @@ else
 fi
 }
 uninstall() {
-sudo systemctl disable subspace
-sudo systemctl stop subspace    
-sudo rm -rf $HOME/subspace $HOME/.config/subspace*
-sudo rm -rf $HOME/.local/share/subspace-cli/
+sudo systemctl disable subspace &> /dev/null
+sudo systemctl stop subspace  &> /dev/null  
+sudo rm -rf $HOME/subspace $HOME/.config/subspace* &> /dev/null
+sudo rm -rf $HOME/.local/share/subspace-cli/ &> /dev/null
 echo "Done"
 cd
 }
