@@ -2,6 +2,7 @@
 # Default variables
 function="install"
 repo=v0.3.1-alpha
+old=v3-v0.1.12
 version=v3-v0.3.1-alpha
 # Options
 option_value(){ echo "$1" | sed -e 's%^--[^=]*=%%g; s%^-[^=]*=%%g'; }
@@ -83,6 +84,11 @@ cd
 update() {
 if [ ! -d $HOME/subspace ]; then
  echo Subspace is not install
+ elif
+ [[ ${version} = ${old} ]]; then
+ name=$( cat $HOME/.config/subspace-cli/settings.toml | grep name | awk '{print $3}' | sed 's/\"//g' )
+ cd $HOME/subspace
+ ./subspace-cli-file-{name} wipe
  elif
  [[ ${version} != $( ls $HOME/subspace | sed -e "s%subspace-cli-ubuntu-x86_64-v%v%" ) ]]; then
  cd $HOME/subspace
