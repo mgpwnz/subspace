@@ -81,7 +81,7 @@ echo "Done"
 cd
 }
 update() {
-if[ ! -d $HOME/subspace ]; then
+if [ ! -d $HOME/subspace ]; then
  echo Subspace is not install
  elif
  [[ ${version} != ${ ls $HOME/subspace | sed -e "s%subspace-cli-ubuntu-x86_64-v%v%" } ]]; then
