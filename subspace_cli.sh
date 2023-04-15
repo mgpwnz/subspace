@@ -86,9 +86,10 @@ if [ ! -d $HOME/subspace ]; then
  echo Subspace is not install
  elif
  [[ ${version} = ${old} ]]; then
- name=$( cat $HOME/.config/subspace-cli/settings.toml | grep name | awk '{print $3}' | sed 's/\"//g' )
  cd $HOME/subspace
- ./subspace-cli-file-{name} wipe
+ instver=$( ls $HOME/subspace | sed -e "s%subspace-cli-ubuntu-x86_64-v%v%" )
+ ./subspace-cli-ubuntu-x86_64-${instver} wipe
+ 
  elif
  [[ ${version} != $( ls $HOME/subspace | sed -e "s%subspace-cli-ubuntu-x86_64-v%v%" ) ]]; then
  cd $HOME/subspace
