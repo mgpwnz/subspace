@@ -54,7 +54,7 @@ WorkingDirectory=/root/subspace/
 ExecStart=/root/subspace/subspace-cli-ubuntu-x86_64-${version} farm  --verbose
 Restart=always
 RestartSec=10
-LimitNOFILE=10000
+LimitNOFILE=1024000
 [Install]
 WantedBy=multi-user.target
 " > $HOME/subspace.service
