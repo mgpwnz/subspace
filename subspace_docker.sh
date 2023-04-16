@@ -267,16 +267,53 @@ cd
 }
 uninstallall() {
 cd $HOME
-n=1
-while [ -d $HOME/subspace* ]
-do
-		cd $HOME/subspace$n && docker compose down -v  
-    sudo rm -rf $HOME/subspace$n
-    echo Node $n delete
-    cd $HOME
-    n=$[ $n + 1 ]
-done
 
+if [ -d $HOME/subspace1 ]; then
+		cd $HOME/subspace && docker compose down -v  
+    sudo rm -rf $HOME/subspace
+    echo Node 1 delete
+	fi
+if [ -d $HOME/subspace2 ]; then
+		cd $HOME/subspace2 && docker compose down -v 
+    sudo rm -rf $HOME/subspace2
+    echo Node 2 delete
+	fi
+if [ -d $HOME/subspace3 ]; then
+		cd $HOME/subspace3 && docker compose down -v 
+    sudo rm -rf $HOME/subspace3
+    echo Node 3 delete
+	fi
+if [ -d $HOME/subspace4 ]; then
+		cd $HOME/subspace4 && docker compose down -v 
+    sudo rm -rf $HOME/subspace4
+    echo Node 4 delete
+	fi
+if [ -d $HOME/subspace5 ]; then
+		cd $HOME/subspace5 && docker compose down -v
+    sudo rm -rf $HOME/subspace5
+    echo Node 5 delete
+	fi
+if [ -d $HOME/subspace6 ]; then
+		cd $HOME/subspace6 && docker compose down -v
+    sudo rm -rf $HOME/subspace6
+    echo Node 6 delete
+	fi
+ if [ -d $HOME/subspace7 ]; then
+		cd $HOME/subspace7 && docker compose down -v
+    sudo rm -rf $HOME/subspace7
+    echo Node 7 delete
+	fi
+if [ -d $HOME/subspace8 ]; then
+		cd $HOME/subspace8 && docker compose down -v
+    sudo rm -rf $HOME/subspace8
+    echo Node 8 delete
+	fi
+if [ -d $HOME/subspace9 ]; then
+		cd $HOME/subspace9 && docker compose down -v
+    sudo rm -rf $HOME/subspace9
+    echo Node 9 delete
+	fi 
+cd $HOME
 }
 # Actions
 sudo apt install wget -y &>/dev/null
