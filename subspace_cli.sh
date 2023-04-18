@@ -109,6 +109,7 @@ rm subspace-cli-ubuntu*
 wget https://github.com/subspace/subspace-cli/releases/download/${repo}/subspace-cli-ubuntu-x86_64-${version} && \
 chmod +x subspace-cli-ubuntu-x86_64-${version} && \
 ./subspace-cli-ubuntu-x86_64-* wipe
+./subspace-cli-ubuntu-x86_64-* init
 sed -i -e "s/subspace-cli-ubuntu-x86_64-.*/subspace-cli-ubuntu-x86_64-${version} farm  --verbose/g" /etc/systemd/system/subspace.service
 sudo systemctl daemon-reload
 echo -e '\n\e[42mRunning a service\e[0m\n' && sleep 1 
