@@ -29,14 +29,10 @@ while test $# -gt 0; do
 	esac
 done
 install() {
-if [ -d $HOME/subspace ]; then
-break
-else
+while [ ! -d $HOME/subspace ]; do
 sudo apt-get install wget jq ocl-icd-opencl-dev libopencl-clang-dev libgomp1 ocl-icd-libopencl1 -y
 sleep 2
-if [ ! -d $HOME/subspace ]; then
 mkdir $HOME/subspace
-fi
 cd $HOME/subspace
 #download cli
 wget https://github.com/subspace/subspace-cli/releases/download/${repo}/subspace-cli-ubuntu-x86_64-${version} && \
@@ -87,6 +83,7 @@ sudo rm -rf $HOME/subspace $HOME/.config/subspace* &> /dev/null
 sudo rm -rf $HOME/.local/share/subspace-cli/ &> /dev/null
 echo "Done"
 cd
+done
 }
 update() {
 installed=$( ls $HOME/subspace | sed -e "s%subspace-cli-ubuntu-x86_64-v%v%")
