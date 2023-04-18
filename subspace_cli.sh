@@ -97,8 +97,7 @@ if [ -d $HOME/subspace || [ ${version} = ${oldnetwork} ]]; then
  sudo systemctl restart subspace
  echo -e "Your subspace node \e[32mUpgrate\e[39m!"
  cd $HOME
- elif
- [ -d $HOME/subspace || [ ${version} != $( ls $HOME/subspace | sed -e "s%subspace-cli-ubuntu-x86_64-v%v%" ) ]]; then
+ elif [ -d $HOME/subspace || [ ${version} != $( ls $HOME/subspace | sed -e "s%subspace-cli-ubuntu-x86_64-v%v%" ) ]]; then
  cd $HOME/subspace
  rm subspace-cli-ubuntu*
  #download cli
@@ -109,10 +108,10 @@ if [ -d $HOME/subspace || [ ${version} = ${oldnetwork} ]]; then
  echo -e '\n\e[42mRunning a service\e[0m\n' && sleep 1 
  sudo systemctl enable subspace
  sudo systemctl restart subspace
- echo -e "Your subspace node \e[32mUpdate\e[39m!"
+ echo -e "Your subspace node Update!"
  cd $HOME
  else
- echo -e "Your subspace node \e[32mlast version\e[39m!"
+ echo -e "Your subspace node last version!"
 fi
 }
 # Actions
