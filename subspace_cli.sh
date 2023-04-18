@@ -74,7 +74,6 @@ if [[ `service subspace status | grep active` =~ "running" ]]; then
 else
  echo -e "Your subspace node \e[31mwas not installed correctly\e[39m, please reinstall."
 fi
-fi
 }
 uninstall() {
 sudo systemctl disable subspace &> /dev/null
