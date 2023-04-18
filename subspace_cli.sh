@@ -122,10 +122,10 @@ sudo systemctl enable subspace
 sudo systemctl restart subspace
 echo -e "Your subspace node \e[32mUpgrade\e[39m!"
 cd $HOME
+fi
 }
 # Actions
 sudo apt install wget -y &>/dev/null
 cd
-fi
 $function
 
