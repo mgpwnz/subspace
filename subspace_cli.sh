@@ -2,8 +2,8 @@
 # Default variables
 function="install"
 repo=v0.3.1-alpha
-oldnetwork=v3-v0.1.12
 version=v3-v0.3.1-alpha
+installed=$( ls $HOME/subspace | sed -e "s%subspace-cli-ubuntu-x86_64-v%v%")
 # Options
 option_value(){ echo "$1" | sed -e 's%^--[^=]*=%%g; s%^-[^=]*=%%g'; }
 while test $# -gt 0; do
@@ -16,8 +16,12 @@ while test $# -gt 0; do
             function="uninstall"
             shift
             ;;
-	 -up|--update)
+	    -up|--update)
             function="update"
+            shift
+            ;;
+        -upg|--upgrade)
+            function="upgrade"
             shift
             ;;
         *|--)
@@ -26,13 +30,11 @@ while test $# -gt 0; do
 	esac
 done
 install() {
-if [ -d $HOME/subspace ]; then
-        break
-    else
-        echo mkdir Subspace
-        mkdir $HOME/subspace
-fi
 sudo apt-get install wget jq ocl-icd-opencl-dev libopencl-clang-dev libgomp1 ocl-icd-libopencl1 -y
+sleep 2
+if [ ! -d $HOME/subspace ]; then
+mkdir $HOME/subspace
+fi
 cd $HOME/subspace
 #download cli
 wget https://github.com/subspace/subspace-cli/releases/download/${repo}/subspace-cli-ubuntu-x86_64-${version} && \
@@ -56,7 +58,7 @@ WorkingDirectory=/root/subspace/
 ExecStart=/root/subspace/subspace-cli-ubuntu-x86_64-${version} farm  --verbose
 Restart=always
 RestartSec=10
-LimitNOFILE=10000
+LimitNOFILE=1024000
 [Install]
 WantedBy=multi-user.target
 " > $HOME/subspace.service
@@ -84,37 +86,39 @@ echo "Done"
 cd
 }
 update() {
-if [ -d $HOME/subspace ||  ${version} = ${oldnetwork} ]; then
- cd $HOME/subspace
- rm subspace-cli-ubuntu*
- #download
- wget https://github.com/subspace/subspace-cli/releases/download/${repo}/subspace-cli-ubuntu-x86_64-${version} && \
- chmod +x subspace-cli-ubuntu-x86_64-${version} && ./subspace-cli-ubuntu-x86_64* wipe
- sed -i -e "s/subspace-cli-ubuntu-x86_64-.*/subspace-cli-ubuntu-x86_64-${version} farm  --verbose/g" /etc/systemd/system/subspace.service
- sudo systemctl daemon-reload
- echo -e '\n\e[42mRunning a service\e[0m\n' && sleep 1 
- sudo systemctl enable subspace
- sudo systemctl restart subspace
- echo -e "Your subspace node \e[32mUpgrate\e[39m!"
- cd $HOME
- elif [ -d $HOME/subspace ||  ${version} != $( ls $HOME/subspace | sed -e "s%subspace-cli-ubuntu-x86_64-v%v%" ) ]; then
- cd $HOME/subspace
- rm subspace-cli-ubuntu*
- #download cli
- wget https://github.com/subspace/subspace-cli/releases/download/${repo}/subspace-cli-ubuntu-x86_64-${version} && \
- chmod +x subspace-cli-ubuntu-x86_64-${version} && \
- sed -i -e "s/subspace-cli-ubuntu-x86_64-.*/subspace-cli-ubuntu-x86_64-${version} farm  --verbose/g" /etc/systemd/system/subspace.service
- sudo systemctl daemon-reload
- echo -e '\n\e[42mRunning a service\e[0m\n' && sleep 1 
- sudo systemctl enable subspace
- sudo systemctl restart subspace
- echo -e "Your subspace node Update!"
- cd $HOME
- else
- echo -e "Your subspace node last version!"
+if [[ ${version} != ${installed} ]]; then
+cd $HOME/subspace
+rm subspace-cli-ubuntu*
+#download cli
+wget https://github.com/subspace/subspace-cli/releases/download/${repo}/subspace-cli-ubuntu-x86_64-${version} && \
+chmod +x subspace-cli-ubuntu-x86_64-${version} && \
+sed -i -e "s/subspace-cli-ubuntu-x86_64-.*/subspace-cli-ubuntu-x86_64-${version} farm  --verbose/g" /etc/systemd/system/subspace.service
+sudo systemctl daemon-reload
+echo -e '\n\e[42mRunning a service\e[0m\n' && sleep 1 
+sudo systemctl enable subspace
+sudo systemctl restart subspace
+echo -e "Your subspace node \e[32mUpdate\e[39m!"
+cd $HOME
+else
+echo -e "Your subspace node \e[32mlast version\e[39m!"
 fi
+}
+upgrade() {
+cd $HOME/subspace
+rm subspace-cli-ubuntu*
+wget https://github.com/subspace/subspace-cli/releases/download/${repo}/subspace-cli-ubuntu-x86_64-${version} && \
+chmod +x subspace-cli-ubuntu-x86_64-${version} && \
+./subspace-cli-ubuntu-x86_64-* wipe
+sed -i -e "s/subspace-cli-ubuntu-x86_64-.*/subspace-cli-ubuntu-x86_64-${version} farm  --verbose/g" /etc/systemd/system/subspace.service
+sudo systemctl daemon-reload
+echo -e '\n\e[42mRunning a service\e[0m\n' && sleep 1 
+sudo systemctl enable subspace
+sudo systemctl restart subspace
+echo -e "Your subspace node \e[32mUpgrade\e[39m!"
+cd $HOME
 }
 # Actions
 sudo apt install wget -y &>/dev/null
 cd
 $function
+
