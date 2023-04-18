@@ -1,0 +1,11 @@
+. <(wget -qO- https://raw.githubusercontent.com/mgpwnz/subspace/main/subspace_cli.sh)
+-in 
+-un
+-up
+-upg
+
+. <(wget -qO- https://raw.githubusercontent.com/mgpwnz/subspace/main/subspace.sh)
+-in
+-un
+-ml
+-una
