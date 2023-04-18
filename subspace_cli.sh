@@ -128,4 +128,3 @@ fi
 sudo apt install wget -y &>/dev/null
 cd
 $function
-
