@@ -84,7 +84,7 @@ echo "Done"
 cd
 }
 update() {
-if [ -d $HOME/subspace || [ ${version} = ${oldnetwork}  ]]; then
+if [ -d $HOME/subspace || [ ${version} = ${oldnetwork} ]]; then
  cd $HOME/subspace
  rm subspace-cli-ubuntu*
  #download
@@ -98,7 +98,7 @@ if [ -d $HOME/subspace || [ ${version} = ${oldnetwork}  ]]; then
  echo -e "Your subspace node \e[32mUpgrate\e[39m!"
  cd $HOME
  elif
- [ -d $HOME/subspace || [${version} != $( ls $HOME/subspace | sed -e "s%subspace-cli-ubuntu-x86_64-v%v%" ) ]]; then
+ [ -d $HOME/subspace || [ ${version} != $( ls $HOME/subspace | sed -e "s%subspace-cli-ubuntu-x86_64-v%v%" ) ]]; then
  cd $HOME/subspace
  rm subspace-cli-ubuntu*
  #download cli
