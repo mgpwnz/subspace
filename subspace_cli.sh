@@ -26,13 +26,12 @@ while test $# -gt 0; do
 	esac
 done
 install() {
-sudo apt-get install wget jq ocl-icd-opencl-dev libopencl-clang-dev libgomp1 ocl-icd-libopencl1 -y
-sleep 2
 if [ -d $HOME/subspace ]; then
         break
     else
         mkdir $HOME/subspace
 fi
+sudo apt-get install wget jq ocl-icd-opencl-dev libopencl-clang-dev libgomp1 ocl-icd-libopencl1 -y
 cd $HOME/subspace
 #download cli
 wget https://github.com/subspace/subspace-cli/releases/download/${repo}/subspace-cli-ubuntu-x86_64-${version} && \
