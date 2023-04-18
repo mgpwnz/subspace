@@ -2,7 +2,7 @@
 # Default variables
 function="install"
 repo=v0.3.1-alpha
-old=v3-v0.1.12
+oldnetwork=v3-v0.1.12
 version=v3-v0.3.1-alpha
 # Options
 option_value(){ echo "$1" | sed -e 's%^--[^=]*=%%g; s%^-[^=]*=%%g'; }
@@ -85,11 +85,19 @@ update() {
 if [ ! -d $HOME/subspace ]; then
  echo Subspace is not install
  elif
- [[ ${version} = ${old} ]]; then
+ [[ ${version} = ${oldnetwork} ]]; then
  cd $HOME/subspace
- instver=$( ls $HOME/subspace | sed -e "s%subspace-cli-ubuntu-x86_64-v%v%" )
- ./subspace-cli-ubuntu-x86_64-${instver} wipe
- 
+ rm subspace-cli-ubuntu*
+ #download
+ wget https://github.com/subspace/subspace-cli/releases/download/${repo}/subspace-cli-ubuntu-x86_64-${version} && \
+ chmod +x subspace-cli-ubuntu-x86_64-${version} && ./subspace-cli-ubuntu-x86_64* wipe
+ sed -i -e "s/subspace-cli-ubuntu-x86_64-.*/subspace-cli-ubuntu-x86_64-${version} farm  --verbose/g" /etc/systemd/system/subspace.service
+ sudo systemctl daemon-reload
+ echo -e '\n\e[42mRunning a service\e[0m\n' && sleep 1 
+ sudo systemctl enable subspace
+ sudo systemctl restart subspace
+ echo -e "Your subspace node \e[32mUpgrate\e[39m!"
+ cd $HOME
  elif
  [[ ${version} != $( ls $HOME/subspace | sed -e "s%subspace-cli-ubuntu-x86_64-v%v%" ) ]]; then
  cd $HOME/subspace
