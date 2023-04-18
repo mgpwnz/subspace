@@ -30,7 +30,7 @@ sudo apt-get install wget jq ocl-icd-opencl-dev libopencl-clang-dev libgomp1 ocl
 sleep 2
 if [  -d $HOME/subspace ]; then
 echo -e "Your subspace node installed, for update use \e[32m -up \e[39m!"
-exit 1;
+exit 1
 else
 mkdir $HOME/subspace
 fi
@@ -85,10 +85,7 @@ echo "Done"
 cd
 }
 update() {
-if [ ! -d $HOME/subspace ]; then
- echo -e "Subspace is not install use suffix \e[32m-in\e[39m!"
- elif
- [[ ${version} = ${oldnetwork} ]]; then
+if [ -d $HOME/subspace || [ ${version} = ${oldnetwork}  ]]; then
  cd $HOME/subspace
  rm subspace-cli-ubuntu*
  #download
@@ -102,7 +99,7 @@ if [ ! -d $HOME/subspace ]; then
  echo -e "Your subspace node \e[32mUpgrate\e[39m!"
  cd $HOME
  elif
- [[ ${version} != $( ls $HOME/subspace | sed -e "s%subspace-cli-ubuntu-x86_64-v%v%" ) ]]; then
+ [ -d $HOME/subspace || [${version} != $( ls $HOME/subspace | sed -e "s%subspace-cli-ubuntu-x86_64-v%v%" ) ]]; then
  cd $HOME/subspace
  rm subspace-cli-ubuntu*
  #download cli
