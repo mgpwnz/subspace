@@ -86,7 +86,7 @@ cd
 }
 update() {
 if [ ! -d $HOME/subspace ]; then
- echo Subspace is not install
+ echo -e "Subspace is not install use suffix \e[32m-in\e[39m!"
  elif
  [[ ${version} = ${oldnetwork} ]]; then
  cd $HOME/subspace
