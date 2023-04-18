@@ -81,7 +81,7 @@ sudo systemctl stop subspace  &> /dev/null
 sudo rm -rf $HOME/subspace $HOME/.config/subspace* &> /dev/null
 sudo rm -rf $HOME/.local/share/subspace-cli/ &> /dev/null
 echo "Done"
-cd
+cd $HOME
 }
 update() {
 installed=$( ls $HOME/subspace | sed -e "s%subspace-cli-ubuntu-x86_64-v%v%")
