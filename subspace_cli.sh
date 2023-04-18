@@ -28,7 +28,7 @@ done
 install() {
 sudo apt-get install wget jq ocl-icd-opencl-dev libopencl-clang-dev libgomp1 ocl-icd-libopencl1 -y
 sleep 2
-if [  -d $HOME/subspace ]; then
+if [ -d $HOME/subspace ]; then
         break
     else
         mkdir $HOME/subspace
