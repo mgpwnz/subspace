@@ -32,7 +32,7 @@ if [ ! -d $HOME/subspace ]; then
 mkdir $HOME/subspace
 else
 echo -e "Your subspace node installed, for update use \e[32m -up \e[39m!"
-break
+break;
 fi
 cd $HOME/subspace
 #download cli
