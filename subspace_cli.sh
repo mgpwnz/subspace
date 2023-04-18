@@ -99,11 +99,16 @@ sudo systemctl enable subspace
 sudo systemctl restart subspace
 echo -e "Your subspace node \e[32mUpdate\e[39m!"
 cd $HOME
+elif [ ! -d $HOME/subspace ]; then
+echo Need install node!
 else
 echo -e "Your subspace node \e[32mlast version\e[39m!"
 fi
 }
 upgrade() {
+if [ ! -d $HOME/subspace ]; then
+echo Need install node!
+else
 cd $HOME/subspace
 rm subspace-cli-ubuntu*
 wget https://github.com/subspace/subspace-cli/releases/download/${repo}/subspace-cli-ubuntu-x86_64-${version} && \
@@ -121,5 +126,6 @@ cd $HOME
 # Actions
 sudo apt install wget -y &>/dev/null
 cd
+fi
 $function
 
