@@ -1,6 +1,6 @@
 #!/bin/bash
 # Default variables
-version="gemini-3d-2023-apr-14"
+version="gemini-3d-2023-apr-18"
 function="install"
 # Options
 option_value(){ echo "$1" | sed -e 's%^--[^=]*=%%g; s%^-[^=]*=%%g'; }
