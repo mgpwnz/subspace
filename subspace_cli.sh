@@ -73,7 +73,7 @@ if [[ `service subspace status | grep active` =~ "running" ]]; then
   echo -e "Use \e[7mjournalctl -fu subspace\e[0m for logs"
 else
  echo -e "Your subspace node \e[31mwas not installed correctly\e[39m, please reinstall."
-fi
+done
 }
 uninstall() {
 sudo systemctl disable subspace &> /dev/null
@@ -82,7 +82,6 @@ sudo rm -rf $HOME/subspace $HOME/.config/subspace* &> /dev/null
 sudo rm -rf $HOME/.local/share/subspace-cli/ &> /dev/null
 echo "Done"
 cd
-done
 }
 update() {
 installed=$( ls $HOME/subspace | sed -e "s%subspace-cli-ubuntu-x86_64-v%v%")
