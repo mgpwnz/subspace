@@ -102,7 +102,7 @@ sudo systemctl restart subspace
 echo -e "Your subspace node \e[32mUpdate\e[39m!"
 cd $HOME
 else
-echo -e "Your subspace node \e[32mlast version\e[39m!"
+echo -e "Your Subspace node \e[32mlast version\e[39m!"
 fi
 }
 upgrade() {
