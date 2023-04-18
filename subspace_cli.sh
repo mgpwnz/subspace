@@ -86,7 +86,9 @@ cd $HOME
 }
 update() {
 installed=$( ls $HOME/subspace | sed -e "s%subspace-cli-ubuntu-x86_64-v%v%")
-if [[ ${version} != ${installed} ]]; then
+if [ ! -d $HOME/subspace ]; then
+echo Need install node!
+elif [[ ${version} != ${installed} ]]; then
 cd $HOME/subspace
 rm subspace-cli-ubuntu*
 #download cli
@@ -99,8 +101,6 @@ sudo systemctl enable subspace
 sudo systemctl restart subspace
 echo -e "Your subspace node \e[32mUpdate\e[39m!"
 cd $HOME
-elif [ ! -d $HOME/subspace ]; then
-echo Need install node!
 else
 echo -e "Your subspace node \e[32mlast version\e[39m!"
 fi
