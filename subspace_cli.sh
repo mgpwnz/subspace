@@ -31,7 +31,7 @@ done
 install() {
 if [ -d $HOME/subspace ]; then
 break
-fi
+else
 sudo apt-get install wget jq ocl-icd-opencl-dev libopencl-clang-dev libgomp1 ocl-icd-libopencl1 -y
 sleep 2
 if [ ! -d $HOME/subspace ]; then
@@ -77,6 +77,7 @@ if [[ `service subspace status | grep active` =~ "running" ]]; then
   echo -e "Use \e[7mjournalctl -fu subspace\e[0m for logs"
 else
  echo -e "Your subspace node \e[31mwas not installed correctly\e[39m, please reinstall."
+fi
 fi
 }
 uninstall() {
