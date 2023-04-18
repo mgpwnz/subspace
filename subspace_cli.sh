@@ -30,7 +30,7 @@ sudo apt-get install wget jq ocl-icd-opencl-dev libopencl-clang-dev libgomp1 ocl
 sleep 2
 if [  -d $HOME/subspace ]; then
 echo -e "Your subspace node installed, for update use \e[32m -up \e[39m!"
-exit 1
+break;
 else
 mkdir $HOME/subspace
 fi
