@@ -30,6 +30,9 @@ while test $# -gt 0; do
 	esac
 done
 install() {
+if [ -d $HOME/subspace ]; then
+break
+fi
 sudo apt-get install wget jq ocl-icd-opencl-dev libopencl-clang-dev libgomp1 ocl-icd-libopencl1 -y
 sleep 2
 if [ ! -d $HOME/subspace ]; then
