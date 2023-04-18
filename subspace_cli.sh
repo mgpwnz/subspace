@@ -28,11 +28,11 @@ done
 install() {
 sudo apt-get install wget jq ocl-icd-opencl-dev libopencl-clang-dev libgomp1 ocl-icd-libopencl1 -y
 sleep 2
-if [ ! -d $HOME/subspace ]; then
-mkdir $HOME/subspace
-else
+if [  -d $HOME/subspace ]; then
 echo -e "Your subspace node installed, for update use \e[32m -up \e[39m!"
-break;
+exit 1;
+else
+mkdir $HOME/subspace
 fi
 cd $HOME/subspace
 #download cli
