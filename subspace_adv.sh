@@ -1,6 +1,10 @@
 #!/bin/bash
 echo -e "\e[1m\e[32m1. Updating dependencies... \e[0m" && sleep 1
 sudo apt update &> /dev/null
+apt-get update && DEBIAN_FRONTEND=noninteractive TZ=Etc/UTC apt-get install -y --no-install-recommends tzdata git ca-certificates curl build-essential libssl-dev pkg-config libclang-dev cmake jq
+echo -e '\n\e[42mInstall Rust\e[0m\n' && sleep 1
+sudo curl https://sh.rustup.rs -sSf | sh -s -- -y
+source $HOME/.cargo/env
 
 echo "=================================================="
 
@@ -13,7 +17,6 @@ git clone https://github.com/subspace/subspace.git
 cd $HOME/sub/subspace
 echo -e "\e[1m\e[32m3. Compiling... \e[0m" && sleep 1
 git checkout gemini-3d-2023-apr-18 
-sleep 4
 cargo build --profile production --bin subspace-node --bin subspace-farmer
 
 echo -e "\e[1m\e[32m4. Moving node to /root/sub/subspace-node ... \e[0m" && sleep 1
