@@ -1,5 +1,4 @@
 #!/bin/bash
-version=gemini-3d-2023-apr-18
 echo -e "\e[1m\e[32m1. Updating dependencies... \e[0m" && sleep 1
 sudo apt update &> /dev/null
 
@@ -11,7 +10,7 @@ cd $HOME
 mkdir sub/ && cd sub
 git clone https://github.com/subspace/subspace.git
 cd subspace
-git checkout $version
+git checkout gemini-3d-2023-apr-18 && \
 cargo build \
     --profile production \
     --bin subspace-node \
