@@ -10,13 +10,10 @@ cd $HOME
 mkdir sub/ && cd sub
 echo -e "\e[1m\e[32m2. Git clone \e[0m" && sleep 1
 git clone https://github.com/subspace/subspace.git
-cd subspace
+cd $HOME/sub/subspace
 echo -e "\e[1m\e[32m3. Compiling... \e[0m" && sleep 1
 git checkout gemini-3d-2023-apr-18 && \
-cargo build \
-    --profile production \
-    --bin subspace-node \
-    --bin subspace-farmer
+cargo build --profile production --bin subspace-node --bin subspace-farmer
 
 echo -e "\e[1m\e[32m4. Moving node to /root/sub/subspace-node ... \e[0m" && sleep 1
 sudo mv /root/sub/subspace/target/production/subspace-node $HOME/sub/subspace-node
