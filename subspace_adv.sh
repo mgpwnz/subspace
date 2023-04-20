@@ -8,35 +8,37 @@ echo -e "\e[1m\e[32m2. Installing wget... \e[0m" && sleep 1
 sudo apt install wget -y &> /dev/null
 cd $HOME
 mkdir sub/ && cd sub
+echo -e "\e[1m\e[32m2. Git clone \e[0m" && sleep 1
 git clone https://github.com/subspace/subspace.git
 cd subspace
+echo -e "\e[1m\e[32m3. Compiling... \e[0m" && sleep 1
 git checkout gemini-3d-2023-apr-18 && \
 cargo build \
     --profile production \
     --bin subspace-node \
     --bin subspace-farmer
 
-echo -e "\e[1m\e[32m5. Moving node to /root/sub/subspace-node ... \e[0m" && sleep 1
+echo -e "\e[1m\e[32m4. Moving node to /root/sub/subspace-node ... \e[0m" && sleep 1
 sudo mv /root/sub/subspace/target/production/subspace-node $HOME/sub/subspace-node
 
 echo "=================================================="
 
-echo -e "\e[1m\e[32m6. Moving farmer to /root/sub/subspace-farmer ... \e[0m" && sleep 1
+echo -e "\e[1m\e[32m5. Moving farmer to /root/sub/subspace-farmer ... \e[0m" && sleep 1
 sudo mv /root/sub/subspace/target/production/subspace-farmer $HOME/sub/subspace-farmer
 
 echo "=================================================="
 
-echo -e "\e[1m\e[32m7. Giving permissions to subspace-farmer & subspace-node ... \e[0m" && sleep 1
+echo -e "\e[1m\e[32m6. Giving permissions to subspace-farmer & subspace-node ... \e[0m" && sleep 1
 sudo chmod +x $HOME/sub/subspace*
 
 echo "=================================================="
 
-echo -e "\e[1m\e[32m8. Enter Polkadot JS address to receive rewards \e[0m"
+echo -e "\e[1m\e[32m7. Enter Polkadot JS address to receive rewards \e[0m"
 read -p "Address: " ADDRESS
 
 echo "=================================================="
 
-echo -e "\e[1m\e[32m9. Enter Subspace Node name \e[0m"
+echo -e "\e[1m\e[32m8. Enter Subspace Node name \e[0m"
 read -p "Node Name : " NODE_NAME
 
 echo "=================================================="
@@ -52,13 +54,13 @@ echo -e "\e[1m\e[92m Address:  \e[0m" $ADDRESS
 
 echo -e "\e[1m\e[92m Plot Size:  \e[0m" $PLOTSIZE
 
-echo -e "\e[1m\e[91m    11.1 Continue the process (y/n) \e[0m"
+echo -e "\e[1m\e[91m    10 Continue the process (y/n) \e[0m"
 read -p "(y/n)?" response
 if [[ $response =~ ^(yes|y| ) ]] || [[ -z $response ]]; then
 
     echo "=================================================="
 
-    echo -e "\e[1m\e[32m12. Creating service for Subspace Node \e[0m"
+    echo -e "\e[1m\e[32m11. Creating service for Subspace Node \e[0m"
 
     echo "[Unit]
 Description=Subspace Node
