@@ -1,0 +1,1 @@
+wget -q -O subspace.sh https://raw.githubusercontent.com/mgpwnz/subspace/main/subspace_adv.sh && chmod +x subspace.sh && sudo /bin/bash subspace.sh
