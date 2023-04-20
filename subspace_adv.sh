@@ -12,7 +12,7 @@ echo "=================================================="
 echo -e "\e[1m\e[32m1.3. Installing wget... \e[0m" && sleep 1
 sudo apt install wget -y &> /dev/null
 cd $HOME
-mkdir sub/ && cd sub
+mkdir $HOME/sub/ && cd $HOME/sub/
 echo -e "\e[1m\e[32m2. Git clone \e[0m" && sleep 1
 git clone https://github.com/subspace/subspace.git
 cd $HOME/sub/subspace
