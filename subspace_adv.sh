@@ -9,12 +9,12 @@ echo -e "\e[1m\e[32m2. Installing wget... \e[0m" && sleep 1
 sudo apt install wget -y &> /dev/null
 cd $HOME
 mkdir subspace/
-echo -e "\e[1m\e[32m3. Downloading subspace node binary gemini-2a-2022-oct-06... \e[0m" && sleep 1
+echo -e "\e[1m\e[32m3. Downloading subspace node binary ... \e[0m" && sleep 1
 sudo wget https://github.com/subspace/subspace/releases/download/gemini-3d-2023-apr-18/subspace-node-ubuntu-x86_64-v3-gemini-3d-2023-apr-18 &> /dev/null
 
 echo "=================================================="
 
-echo -e "\e[1m\e[32m4. Downloading subspace farmer binary gemini-2a-2022-oct-06... \e[0m" && sleep 1
+echo -e "\e[1m\e[32m4. Downloading subspace farmer binary ... \e[0m" && sleep 1
 sudo https://github.com/subspace/subspace/releases/download/gemini-3d-2023-apr-18/subspace-farmer-ubuntu-x86_64-v3-gemini-3d-2023-apr-18 &> /dev/null
 
 echo "=================================================="
