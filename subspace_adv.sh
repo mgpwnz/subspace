@@ -1,5 +1,5 @@
 #!/bin/bash
-
+version=gemini-3d-2023-apr-18
 echo -e "\e[1m\e[32m1. Updating dependencies... \e[0m" && sleep 1
 sudo apt update &> /dev/null
 
@@ -8,29 +8,27 @@ echo "=================================================="
 echo -e "\e[1m\e[32m2. Installing wget... \e[0m" && sleep 1
 sudo apt install wget -y &> /dev/null
 cd $HOME
-mkdir subspace/
-echo -e "\e[1m\e[32m3. Downloading subspace node binary ... \e[0m" && sleep 1
-sudo wget https://github.com/subspace/subspace/releases/download/gemini-3d-2023-apr-18/subspace-node-ubuntu-x86_64-v3-gemini-3d-2023-apr-18 &> /dev/null
+mkdir sub/ && cd sub
+git clone https://github.com/subspace/subspace.git
+cd subspace
+git checkout $version
+cargo build \
+    --profile production \
+    --bin subspace-node \
+    --bin subspace-farmer
+
+echo -e "\e[1m\e[32m5. Moving node to /root/sub/subspace-node ... \e[0m" && sleep 1
+sudo mv /root/sub/subspace/target/production/subspace-node $HOME/sub/subspace-node
 
 echo "=================================================="
 
-echo -e "\e[1m\e[32m4. Downloading subspace farmer binary ... \e[0m" && sleep 1
-sudo https://github.com/subspace/subspace/releases/download/gemini-3d-2023-apr-18/subspace-farmer-ubuntu-x86_64-v3-gemini-3d-2023-apr-18 &> /dev/null
-
-echo "=================================================="
-
-echo -e "\e[1m\e[32m5. Moving node to /usr/local/bin/subspace-node ... \e[0m" && sleep 1
-sudo mv subspace-node* $HOME/subspace/subspace-node
-
-echo "=================================================="
-
-echo -e "\e[1m\e[32m6. Moving farmer to /usr/local/bin/subspace-farmer ... \e[0m" && sleep 1
-sudo mv subspace-farmer* $HOME/subspace/subspace-farmer
+echo -e "\e[1m\e[32m6. Moving farmer to /root/sub/subspace-farmer ... \e[0m" && sleep 1
+sudo mv /root/sub/subspace/target/production/subspace-farmer $HOME/sub/subspace-farmer
 
 echo "=================================================="
 
 echo -e "\e[1m\e[32m7. Giving permissions to subspace-farmer & subspace-node ... \e[0m" && sleep 1
-sudo chmod +x $HOME/subspace/subspace*
+sudo chmod +x $HOME/sub/subspace*
 
 echo "=================================================="
 
@@ -68,8 +66,8 @@ Description=Subspace Node
 
 [Service]
 User=$USER
-WorkingDirectory=/root/subspace/
-ExecStart=/root/subspace/subspace-node --chain gemini-3d --execution wasm --state-pruning archive --blocks-pruning archive --validator --dsn-disable-private-ips --no-private-ipv4 --name '$NODE_NAME'
+WorkingDirectory=/root/sub/
+ExecStart=/root/sub/subspace-node --chain gemini-3d --execution wasm --state-pruning archive --blocks-pruning archive --validator --dsn-disable-private-ips --no-private-ipv4 --name '$NODE_NAME'
 Restart=always
 RestartSec=10
 LimitNOFILE=10000
@@ -89,8 +87,8 @@ Description=Subspace Farmer
 
 [Service]
 User=$USER
-WorkingDirectory=/root/subspace/
-ExecStart=/root/subspace/subspace-farmer farm --reward-address $ADDRESS --plot-size $PLOTSIZE --disable-private-ips
+WorkingDirectory=/root/sub/
+ExecStart=/root/sub/subspace-farmer farm --reward-address $ADDRESS --plot-size $PLOTSIZE --disable-private-ips
 Restart=always
 RestartSec=10
 LimitNOFILE=10000
