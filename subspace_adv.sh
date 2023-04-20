@@ -2,13 +2,13 @@
 echo -e "\e[1m\e[32m1. Updating dependencies... \e[0m" && sleep 1
 sudo apt update &> /dev/null
 apt-get update && DEBIAN_FRONTEND=noninteractive TZ=Etc/UTC apt-get install -y --no-install-recommends tzdata git ca-certificates curl build-essential libssl-dev pkg-config libclang-dev cmake jq
-echo -e '\n\e[42mInstall Rust\e[0m\n' && sleep 1
+echo -e "\e[1m\e[32m1.2 Install Rust \e[0m" && sleep 1
 sudo curl https://sh.rustup.rs -sSf | sh -s -- -y
 source $HOME/.cargo/env
 
 echo "=================================================="
 
-echo -e "\e[1m\e[32m2. Installing wget... \e[0m" && sleep 1
+echo -e "\e[1m\e[32m1.3. Installing wget... \e[0m" && sleep 1
 sudo apt install wget -y &> /dev/null
 cd $HOME
 mkdir sub/ && cd sub
