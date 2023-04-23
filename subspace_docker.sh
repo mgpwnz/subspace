@@ -13,7 +13,11 @@ while test $# -gt 0; do
         -ml|--multi)
             function="multi"
             shift
-            ;;   
+            ;;
+        -up|--update)
+            function="update"
+            shift
+            ;;       
         -un|--uninstall)
             function="uninstall"
             shift
