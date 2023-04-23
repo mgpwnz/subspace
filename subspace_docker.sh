@@ -154,13 +154,6 @@ sed -i.bak "s/:gemini-3d-2023.*/:$version/" docker-compose.yml
 docker compose up -d
 echo Node update!
 fi
-if [  -d $HOME/subspace1 ]; then
-cd $HOME/subspace1
-docker compose down
-sed -i.bak "s/:gemini-3d-2023.*/:$version/" docker-compose.yml
-docker compose up -d
-echo Node update!
-fi
 if [  -d $HOME/subspace2 ]; then
 cd $HOME/subspace2
 docker compose down
@@ -222,7 +215,7 @@ cd $HOME
 #create config multi
 		read -p "Enter quantity(max5): " MNODE
 		echo 'export MNODE='$MNODE  
-while [ $MNODE -gt 0 ]
+while [ $MNODE -gt 1 ]
 do
 # var
 #SUBSPACE_WALLET_ADDRESS
@@ -316,7 +309,7 @@ cd
 uninstallall() {
 cd $HOME
 
-if [ -d $HOME/subspace1 ]; then
+if [ -d $HOME/subspace ]; then
 		cd $HOME/subspace && docker compose down -v  
     sudo rm -rf $HOME/subspace
     echo Node 1 delete
