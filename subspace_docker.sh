@@ -142,6 +142,50 @@ sleep 2
 docker compose up -d && docker compose logs -f --tail 1000
 
 }
+update() {
+if [ ! -d $HOME/subspace ]; then
+cd $HOME/subspace
+docker compose down
+sed -i.bak "s/:gemini-3d-2023.*/:$version/" docker-compose.yml
+docker compose up -d
+echo Node update!
+fi
+if [ ! -d $HOME/subspace1 ]; then
+cd $HOME/subspace1
+docker compose down
+sed -i.bak "s/:gemini-3d-2023.*/:$version/" docker-compose.yml
+docker compose up -d
+echo Node update!
+fi
+if [ ! -d $HOME/subspace2 ]; then
+cd $HOME/subspace2
+docker compose down
+sed -i.bak "s/:gemini-3d-2023.*/:$version/" docker-compose.yml
+docker compose up -d
+echo Node update!
+fi
+if [ ! -d $HOME/subspace3 ]; then
+cd $HOME/subspace3
+docker compose down
+sed -i.bak "s/:gemini-3d-2023.*/:$version/" docker-compose.yml
+docker compose up -d
+echo Node update!
+fi
+if [ ! -d $HOME/subspace4 ]; then
+cd $HOME/subspace4
+docker compose down
+sed -i.bak "s/:gemini-3d-2023.*/:$version/" docker-compose.yml
+docker compose up -d
+echo Node update!
+fi
+if [ ! -d $HOME/subspace5 ]; then
+cd $HOME/subspace5
+docker compose down
+sed -i.bak "s/:gemini-3d-2023.*/:$version/" docker-compose.yml
+docker compose up -d
+echo Node update!
+fi
+}
 
 multi() {
 #docker install
@@ -172,7 +216,7 @@ if ! docker --version; then
 	fi
 cd $HOME
 #create config multi
-		read -p "Enter quantity: " MNODE
+		read -p "Enter quantity(max5): " MNODE
 		echo 'export MNODE='$MNODE  
 while [ $MNODE -gt 0 ]
 do
@@ -293,26 +337,6 @@ if [ -d $HOME/subspace5 ]; then
     sudo rm -rf $HOME/subspace5
     echo Node 5 delete
 	fi
-if [ -d $HOME/subspace6 ]; then
-		cd $HOME/subspace6 && docker compose down -v
-    sudo rm -rf $HOME/subspace6
-    echo Node 6 delete
-	fi
- if [ -d $HOME/subspace7 ]; then
-		cd $HOME/subspace7 && docker compose down -v
-    sudo rm -rf $HOME/subspace7
-    echo Node 7 delete
-	fi
-if [ -d $HOME/subspace8 ]; then
-		cd $HOME/subspace8 && docker compose down -v
-    sudo rm -rf $HOME/subspace8
-    echo Node 8 delete
-	fi
-if [ -d $HOME/subspace9 ]; then
-		cd $HOME/subspace9 && docker compose down -v
-    sudo rm -rf $HOME/subspace9
-    echo Node 9 delete
-	fi 
 cd $HOME
 }
 # Actions
