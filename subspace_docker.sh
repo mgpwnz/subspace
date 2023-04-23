@@ -147,42 +147,42 @@ docker compose up -d && docker compose logs -f --tail 1000
 
 }
 update() {
-if [ ! -d $HOME/subspace ]; then
+if [  -d $HOME/subspace ]; then
 cd $HOME/subspace
 docker compose down
 sed -i.bak "s/:gemini-3d-2023.*/:$version/" docker-compose.yml
 docker compose up -d
 echo Node update!
 fi
-if [ ! -d $HOME/subspace1 ]; then
+if [  -d $HOME/subspace1 ]; then
 cd $HOME/subspace1
 docker compose down
 sed -i.bak "s/:gemini-3d-2023.*/:$version/" docker-compose.yml
 docker compose up -d
 echo Node update!
 fi
-if [ ! -d $HOME/subspace2 ]; then
+if [  -d $HOME/subspace2 ]; then
 cd $HOME/subspace2
 docker compose down
 sed -i.bak "s/:gemini-3d-2023.*/:$version/" docker-compose.yml
 docker compose up -d
 echo Node update!
 fi
-if [ ! -d $HOME/subspace3 ]; then
+if [  -d $HOME/subspace3 ]; then
 cd $HOME/subspace3
 docker compose down
 sed -i.bak "s/:gemini-3d-2023.*/:$version/" docker-compose.yml
 docker compose up -d
 echo Node update!
 fi
-if [ ! -d $HOME/subspace4 ]; then
+if [  -d $HOME/subspace4 ]; then
 cd $HOME/subspace4
 docker compose down
 sed -i.bak "s/:gemini-3d-2023.*/:$version/" docker-compose.yml
 docker compose up -d
 echo Node update!
 fi
-if [ ! -d $HOME/subspace5 ]; then
+if [  -d $HOME/subspace5 ]; then
 cd $HOME/subspace5
 docker compose down
 sed -i.bak "s/:gemini-3d-2023.*/:$version/" docker-compose.yml
