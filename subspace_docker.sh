@@ -94,7 +94,7 @@ sleep 1
         - "0.0.0.0:32433:32433"
       restart: unless-stopped
       command: [
-        "--chain", "gemini-3c",
+        "--chain", "gemini-3d",
         "--base-path", "/var/subspace",
         "--execution", "wasm",
         "--blocks-pruning", "archive",
@@ -205,7 +205,7 @@ sleep 1
         - "0.0.0.0:3${MNODE}433:3${MNODE}433"
       restart: unless-stopped
       command: [
-        "--chain", "gemini-3c",
+        "--chain", "gemini-3d",
         "--base-path", "/var/subspace",
         "--execution", "wasm",
         "--blocks-pruning", "archive",
