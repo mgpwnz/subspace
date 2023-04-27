@@ -2,6 +2,7 @@
 # Default variables
 function="install"
 SNAP_RPC=185.213.27.91:36657
+ver="1.20.3"
 # Options
 option_value(){ echo "$1" | sed -e 's%^--[^=]*=%%g; s%^-[^=]*=%%g'; }
 while test $# -gt 0; do
