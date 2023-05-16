@@ -17,6 +17,10 @@ while test $# -gt 0; do
         -up|--update)
             function="update"
             shift
+            ;;
+        -up1|--update1)
+            function="update1"
+            shift
             ;;       
         -un|--uninstall)
             function="uninstall"
@@ -183,7 +187,15 @@ docker compose up -d
 echo Node update!
 fi
 }
-
+update1() {
+if [  -d $HOME/subspace ]; then
+cd $HOME/subspace
+docker compose down
+sed -i.bak "s/:gemini-3d-2023.*/:$version/" docker-compose.yml
+docker compose up -d
+echo Node update!
+fi
+}
 multi() {
 #docker install
 cd
