@@ -587,6 +587,7 @@ docker compose down
 sed -i.bak "s/:gemini-3d-2023.*/:$version/" docker-compose.yml
 docker compose up -d
 echo Node update!
+docker compose logs -f
 fi
 }
 update2() {
@@ -596,6 +597,7 @@ docker compose down
 sed -i.bak "s/:gemini-3d-2023.*/:$version/" docker-compose.yml
 docker compose up -d
 echo Node update!
+docker compose logs -f
 fi
 }
 update3() {
@@ -605,6 +607,7 @@ docker compose down
 sed -i.bak "s/:gemini-3d-2023.*/:$version/" docker-compose.yml
 docker compose up -d
 echo Node update!
+docker compose logs -f
 fi
 }
 update4() {
@@ -614,6 +617,7 @@ docker compose down
 sed -i.bak "s/:gemini-3d-2023.*/:$version/" docker-compose.yml
 docker compose up -d
 echo Node update!
+docker compose logs -f
 fi
 }
 update5() {
@@ -623,6 +627,7 @@ docker compose down
 sed -i.bak "s/:gemini-3d-2023.*/:$version/" docker-compose.yml
 docker compose up -d
 echo Node update!
+docker compose logs -f
 fi
 }
 uninstall() {
