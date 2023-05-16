@@ -30,6 +30,26 @@ while test $# -gt 0; do
         -up|--update)
             function="update"
             shift
+            ;;
+        -up1|--update1)
+            function="update1"
+            shift
+            ;;
+        -up2|--update2)
+            function="update2"
+            shift
+            ;;
+        -up3|--update3)
+            function="update3"
+            shift
+            ;;
+        -up4|--update4)
+            function="update4"
+            shift
+            ;;
+        -up5|--update5)
+            function="update5"
+            shift
             ;;       
         -un|--uninstall)
             function="uninstall"
@@ -560,7 +580,51 @@ docker compose up -d
 echo Node update!
 fi
 }
-
+update1() {
+if [  -d $HOME/subspace ]; then
+cd $HOME/subspace
+docker compose down
+sed -i.bak "s/:gemini-3d-2023.*/:$version/" docker-compose.yml
+docker compose up -d
+echo Node update!
+fi
+}
+update2() {
+if [  -d $HOME/subspace2 ]; then
+cd $HOME/subspace2
+docker compose down
+sed -i.bak "s/:gemini-3d-2023.*/:$version/" docker-compose.yml
+docker compose up -d
+echo Node update!
+fi
+}
+update3() {
+if [  -d $HOME/subspace3 ]; then
+cd $HOME/subspace3
+docker compose down
+sed -i.bak "s/:gemini-3d-2023.*/:$version/" docker-compose.yml
+docker compose up -d
+echo Node update!
+fi
+}
+update4() {
+if [  -d $HOME/subspace4 ]; then
+cd $HOME/subspace4
+docker compose down
+sed -i.bak "s/:gemini-3d-2023.*/:$version/" docker-compose.yml
+docker compose up -d
+echo Node update!
+fi
+}
+update5() {
+if [  -d $HOME/subspace5 ]; then
+cd $HOME/subspace5
+docker compose down
+sed -i.bak "s/:gemini-3d-2023.*/:$version/" docker-compose.yml
+docker compose up -d
+echo Node update!
+fi
+}
 uninstall() {
 cd $HOME/subspace
 docker compose down -v
