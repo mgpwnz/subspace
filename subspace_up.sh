@@ -13,6 +13,7 @@ case "$response" in
         break
         ;;
     *)
+        exit
         docker compose logs -f
         ;;
 esac
