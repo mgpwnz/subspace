@@ -544,7 +544,8 @@ update1() {
 if [  -d $HOME/subspace ]; then
 cd $HOME/subspace
 sed -i.bak "s/:gemini-3d-2023.*/:$version/" docker-compose.yml
-. <(wget -qO- https://raw.githubusercontent.com/mgpwnz/subspace/r1700/subspace_up.sh) -y
+. <(wget -qO- https://raw.githubusercontent.com/mgpwnz/subspace/r1700/subspace_up.sh)
+cd
 fi
 }
 update2() {
