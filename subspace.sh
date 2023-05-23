@@ -587,12 +587,8 @@ fi
 update1() {
 if [  -d $HOME/subspace ]; then
 cd $HOME/subspace
-docker compose down
-docker compose pull
 sed -i.bak "s/:gemini-3d-2023.*/:$version/" docker-compose.yml
-docker compose up -d
-echo Node update!
-docker compose logs -f
+. <(wget -qO- https://raw.githubusercontent.com/mgpwnz/subspace_up/r1700/subspace.sh)
 fi
 }
 update2() {
