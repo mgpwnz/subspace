@@ -540,7 +540,7 @@ update1() {
 if [  -d $HOME/subspace ]; then
 cd $HOME/subspace
 sed -i.bak "s/:gemini-3d-2023.*/:$version/" docker-compose.yml
-. <(wget -qO- https://raw.githubusercontent.com/mgpwnz/subspace/r1700/subspace_up.sh)
+. <(wget -qO- https://raw.githubusercontent.com/mgpwnz/subspace/main/subspace_up.sh)
 cd
 fi
 }
@@ -548,7 +548,7 @@ update2() {
 if [  -d $HOME/subspace2 ]; then
 cd $HOME/subspace2
 sed -i.bak "s/:gemini-3d-2023.*/:$version/" docker-compose.yml
-. <(wget -qO- https://raw.githubusercontent.com/mgpwnz/subspace/r1700/subspace_up.sh)
+. <(wget -qO- https://raw.githubusercontent.com/mgpwnz/subspace/main/subspace_up.sh)
 cd
 fi
 }
@@ -556,7 +556,7 @@ update3() {
 if [  -d $HOME/subspace3 ]; then
 cd $HOME/subspace3
 sed -i.bak "s/:gemini-3d-2023.*/:$version/" docker-compose.yml
-. <(wget -qO- https://raw.githubusercontent.com/mgpwnz/subspace/r1700/subspace_up.sh)
+. <(wget -qO- https://raw.githubusercontent.com/mgpwnz/subspace/main/subspace_up.sh)
 cd
 fi
 }
@@ -564,7 +564,7 @@ update4() {
 if [  -d $HOME/subspace4 ]; then
 cd $HOME/subspace4
 sed -i.bak "s/:gemini-3d-2023.*/:$version/" docker-compose.yml
-. <(wget -qO- https://raw.githubusercontent.com/mgpwnz/subspace/r1700/subspace_up.sh)
+. <(wget -qO- https://raw.githubusercontent.com/mgpwnz/subspace/main/subspace_up.sh)
 cd
 fi
 }
@@ -572,7 +572,7 @@ update5() {
 if [  -d $HOME/subspace5 ]; then
 cd $HOME/subspace5
 sed -i.bak "s/:gemini-3d-2023.*/:$version/" docker-compose.yml
-. <(wget -qO- https://raw.githubusercontent.com/mgpwnz/subspace/r1700/subspace_up.sh)
+. <(wget -qO- https://raw.githubusercontent.com/mgpwnz/subspace/main/subspace_up.sh)
 cd
 fi
 }
