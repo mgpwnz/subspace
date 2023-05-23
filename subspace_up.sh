@@ -10,10 +10,11 @@ case "$response" in
         docker compose down
         docker compose pull
         docker compose up -d
-        break
+        return 0
         ;;
     *)
         docker compose logs -f
+        return 1
         ;;
 esac
 done
