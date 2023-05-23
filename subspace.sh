@@ -578,35 +578,35 @@ fi
 }
 uninstall() {
 cd $HOME/subspace
-. <(wget -qO- https://raw.githubusercontent.com/mgpwnz/subspace/r1700/subspace_un.sh)
+. <(wget -qO- https://raw.githubusercontent.com/mgpwnz/subspace/main/subspace_un.sh)
 sudo rm -rf $HOME/subspace 
 echo "Done"
 cd
 }
 uninstall2() {
 cd $HOME/subspace2
-. <(wget -qO- https://raw.githubusercontent.com/mgpwnz/subspace/r1700/subspace_un.sh)
+. <(wget -qO- https://raw.githubusercontent.com/mgpwnz/subspace/main/subspace_un.sh)
 sudo rm -rf $HOME/subspace2 
 echo "Done"
 cd
 }
 uninstall3() {
 cd $HOME/subspace3
-. <(wget -qO- https://raw.githubusercontent.com/mgpwnz/subspace/r1700/subspace_un.sh)
+. <(wget -qO- https://raw.githubusercontent.com/mgpwnz/subspace/main/subspace_un.sh)
 sudo rm -rf $HOME/subspace3 
 echo "Done"
 cd
 }
 uninstall4() {
 cd $HOME/subspace4
-. <(wget -qO- https://raw.githubusercontent.com/mgpwnz/subspace/r1700/subspace_un.sh)
+. <(wget -qO- https://raw.githubusercontent.com/mgpwnz/subspace/main/subspace_un.sh)
 sudo rm -rf $HOME/subspace4 
 echo "Done"
 cd
 }
 uninstall5() {
 cd $HOME/subspace5
-. <(wget -qO- https://raw.githubusercontent.com/mgpwnz/subspace/r1700/subspace_un.sh)
+. <(wget -qO- https://raw.githubusercontent.com/mgpwnz/subspace/main/subspace_un.sh)
 sudo rm -rf $HOME/subspace5 
 echo "Done"
 cd
