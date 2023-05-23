@@ -27,10 +27,6 @@ while test $# -gt 0; do
             function="install5"
             shift
             ;;
-        -up|--update)
-            function="update"
-            shift
-            ;;
         -up1|--update1)
             function="update1"
             shift
@@ -543,52 +539,12 @@ sleep 2
 docker compose up -d && docker compose logs -f --tail 1000
 cd $HOME
 }
-#Update all nodes need change
-update() {
-if [  -d $HOME/subspace ]; then
-cd $HOME/subspace
-docker compose down
-docker compose pull
-sed -i.bak "s/:gemini-3d-2023.*/:$version/" docker-compose.yml
-docker compose up -d
-if 
-echo Node update!
-fi
-if [  -d $HOME/subspace2 ]; then
-cd $HOME/subspace2
-docker compose down
-sed -i.bak "s/:gemini-3d-2023.*/:$version/" docker-compose.yml
-docker compose up -d
-echo Node update!
-fi
-if [  -d $HOME/subspace3 ]; then
-cd $HOME/subspace3
-docker compose down
-sed -i.bak "s/:gemini-3d-2023.*/:$version/" docker-compose.yml
-docker compose up -d
-echo Node update!
-fi
-if [  -d $HOME/subspace4 ]; then
-cd $HOME/subspace4
-docker compose down
-sed -i.bak "s/:gemini-3d-2023.*/:$version/" docker-compose.yml
-docker compose up -d
-echo Node update!
-fi
-if [  -d $HOME/subspace5 ]; then
-cd $HOME/subspace5
-docker compose down
-sed -i.bak "s/:gemini-3d-2023.*/:$version/" docker-compose.yml
-docker compose up -d
-echo Node update!
-fi
-}
 #need rework
 update1() {
 if [  -d $HOME/subspace ]; then
 cd $HOME/subspace
 sed -i.bak "s/:gemini-3d-2023.*/:$version/" docker-compose.yml
-. <(wget -qO- https://raw.githubusercontent.com/mgpwnz/subspace_up/r1700/subspace.sh)
+. <(wget -qO- https://raw.githubusercontent.com/mgpwnz/subspace/r1700/subspace_up.sh) -y
 fi
 }
 update2() {
