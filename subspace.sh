@@ -67,10 +67,6 @@ while test $# -gt 0; do
             function="uninstall5"
             shift
             ;;
-        -una|--uninstallall)
-            function="uninstallall"
-            shift
-            ;;
         *|--)
 		break
 		;;
@@ -551,45 +547,33 @@ fi
 update2() {
 if [  -d $HOME/subspace2 ]; then
 cd $HOME/subspace2
-docker compose down
-docker compose pull
 sed -i.bak "s/:gemini-3d-2023.*/:$version/" docker-compose.yml
-docker compose up -d
-echo Node update!
-docker compose logs -f
+. <(wget -qO- https://raw.githubusercontent.com/mgpwnz/subspace/r1700/subspace_up.sh)
+cd
 fi
 }
 update3() {
 if [  -d $HOME/subspace3 ]; then
 cd $HOME/subspace3
-docker compose down
-docker compose pull
 sed -i.bak "s/:gemini-3d-2023.*/:$version/" docker-compose.yml
-docker compose up -d
-echo Node update!
-docker compose logs -f
+. <(wget -qO- https://raw.githubusercontent.com/mgpwnz/subspace/r1700/subspace_up.sh)
+cd
 fi
 }
 update4() {
 if [  -d $HOME/subspace4 ]; then
 cd $HOME/subspace4
-docker compose down
-docker compose pull
 sed -i.bak "s/:gemini-3d-2023.*/:$version/" docker-compose.yml
-docker compose up -d
-echo Node update!
-docker compose logs -f
+. <(wget -qO- https://raw.githubusercontent.com/mgpwnz/subspace/r1700/subspace_up.sh)
+cd
 fi
 }
 update5() {
 if [  -d $HOME/subspace5 ]; then
 cd $HOME/subspace5
-docker compose down
-docker compose pull
 sed -i.bak "s/:gemini-3d-2023.*/:$version/" docker-compose.yml
-docker compose up -d
-echo Node update!
-docker compose logs -f
+. <(wget -qO- https://raw.githubusercontent.com/mgpwnz/subspace/r1700/subspace_up.sh)
+cd
 fi
 }
 uninstall() {
@@ -626,36 +610,6 @@ docker compose down -v
 sudo rm -rf $HOME/subspace5 
 echo "Done"
 cd
-}
-uninstallall() {
-cd $HOME
-
-if [ -d $HOME/subspace ]; then
-		cd $HOME/subspace && docker compose down -v  
-    sudo rm -rf $HOME/subspace
-    echo Node 1 delete
-	fi
-if [ -d $HOME/subspace2 ]; then
-		cd $HOME/subspace2 && docker compose down -v 
-    sudo rm -rf $HOME/subspace2
-    echo Node 2 delete
-	fi
-if [ -d $HOME/subspace3 ]; then
-		cd $HOME/subspace3 && docker compose down -v 
-    sudo rm -rf $HOME/subspace3
-    echo Node 3 delete
-	fi
-if [ -d $HOME/subspace4 ]; then
-		cd $HOME/subspace4 && docker compose down -v 
-    sudo rm -rf $HOME/subspace4
-    echo Node 4 delete
-	fi
-if [ -d $HOME/subspace5 ]; then
-		cd $HOME/subspace5 && docker compose down -v
-    sudo rm -rf $HOME/subspace5
-    echo Node 5 delete
-	fi
-cd $HOME
 }
 # Actions
 sudo apt install wget -y &>/dev/null
