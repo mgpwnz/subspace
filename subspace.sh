@@ -543,6 +543,7 @@ sleep 2
 docker compose up -d && docker compose logs -f --tail 1000
 cd $HOME
 }
+#Update all nodes need change
 update() {
 if [  -d $HOME/subspace ]; then
 cd $HOME/subspace
@@ -581,6 +582,7 @@ docker compose up -d
 echo Node update!
 fi
 }
+#need rework
 update1() {
 if [  -d $HOME/subspace ]; then
 cd $HOME/subspace
