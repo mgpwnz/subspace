@@ -1,19 +1,16 @@
 #!/bin/bash
-function update {
-docker compose down
-docker compose pull
-docker compose up -d
-}
-function logs {
-docker compose logs -f
-}
+while true
+do
 read -r -p "Do you have erros? [y/N] " response
 case "$response" in
     [yY][eE][sS]|[yY]) 
-        update
+        docker compose down
+        docker compose pull
+        docker compose up -d
         break
         ;;
     *)
-        logs
+        docker compose logs -f
         ;;
 esac
+done
