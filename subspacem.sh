@@ -7,8 +7,8 @@ function="install"
 option_value(){ echo "$1" | sed -e 's%^--[^=]*=%%g; s%^-[^=]*=%%g'; }
 while test $# -gt 0; do
         case "$1" in
-        -in|--install)
-            function="install"
+        -in1|--install1)
+            function="install1"
             shift
             ;;
         -in2|--install2)
@@ -47,8 +47,8 @@ while test $# -gt 0; do
             function="update5"
             shift
             ;;       
-        -un|--uninstall)
-            function="uninstall"
+        -un1|--uninstall1)
+            function="uninstall1"
             shift
             ;;
         -un2|--uninstall2)
@@ -72,7 +72,7 @@ while test $# -gt 0; do
 		;;
 	esac
 done
-install() {
+install1() {
 #docker install
 cd
 touch $HOME/.bash_profile
@@ -576,7 +576,7 @@ sed -i.bak "s/:gemini-3d-2023.*/:$version/" docker-compose.yml
 cd
 fi
 }
-uninstall() {
+uninstall1() {
 cd $HOME/subspace
 . <(wget -qO- https://raw.githubusercontent.com/mgpwnz/subspace/main/subspace_un.sh)
 sudo rm -rf $HOME/subspace 
