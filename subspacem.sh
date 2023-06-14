@@ -1,7 +1,7 @@
 #!/bin/bash
 # Default variables
-version="gemini-3d-2023-may-23"
-chain="gemini-3d"
+version="gemini-3f-2023-aug-18"
+chain="gemini-3f"
 function="install"
 # Options
 option_value(){ echo "$1" | sed -e 's%^--[^=]*=%%g; s%^-[^=]*=%%g'; }
@@ -126,7 +126,7 @@ mkdir $HOME/subspace
 fi
 cd $HOME/subspace
 sleep 1
- # Create script 
+# Create script 
   tee $HOME/subspace/docker-compose.yml > /dev/null <<EOF
   version: "3.7"
   services:
@@ -142,14 +142,13 @@ sleep 1
         "--chain", "$chain",
         "--base-path", "/var/subspace",
         "--execution", "wasm",
-        "--blocks-pruning", "archive",
+        "--blocks-pruning", "256",
         "--state-pruning", "archive",
         "--port", "32333",
         "--dsn-listen-on", "/ip4/0.0.0.0/tcp/32433",
         "--rpc-cors", "all",
-        "--rpc-methods", "safe",
-        "--unsafe-ws-external",
-        "--dsn-disable-private-ips",
+        "--rpc-methods", "unsafe",
+        "--rpc-external",
         "--no-private-ipv4",
         "--validator",
         "--name", "$SUBSPACE_NODE_NAME"
@@ -157,7 +156,7 @@ sleep 1
       healthcheck:
         timeout: 5s
         interval: 30s
-        retries: 5
+        retries: 60
 
     farmer:
       depends_on:
@@ -170,13 +169,11 @@ sleep 1
         - "0.0.0.0:32533:32533"
       restart: unless-stopped
       command: [
-        "--base-path", "/var/subspace",
         "farm",
-        "--disable-private-ips",
         "--node-rpc-url", "ws://node:9944",
         "--listen-on", "/ip4/0.0.0.0/tcp/32533",
         "--reward-address", "${SUBSPACE_WALLET_ADDRESS}",
-        "--plot-size", "$SUBSPACE_PLOT_SIZE"
+        "path=/var/subspace,size=$SUBSPACE_PLOT_SIZE",
       ]
   volumes:
     node-data:
@@ -214,7 +211,7 @@ fi
 cd $HOME/subspace2
 sleep 1
  # Create script 
-  tee $HOME/subspace2/docker-compose.yml > /dev/null <<EOF
+  tee $HOME/subspace/docker-compose.yml > /dev/null <<EOF
   version: "3.7"
   services:
     node:
@@ -222,29 +219,28 @@ sleep 1
       volumes:
         - node-data:/var/subspace:rw
       ports:
-        - "0.0.0.0:41333:41333"
-        - "0.0.0.0:41433:41433"
+        - "0.0.0.0:33333:33333"
+        - "0.0.0.0:33433:33433"
       restart: unless-stopped
       command: [
         "--chain", "$chain",
         "--base-path", "/var/subspace",
         "--execution", "wasm",
-        "--blocks-pruning", "archive",
+        "--blocks-pruning", "256",
         "--state-pruning", "archive",
-        "--port", "41333",
-        "--dsn-listen-on", "/ip4/0.0.0.0/tcp/41433",
+        "--port", "33333",
+        "--dsn-listen-on", "/ip4/0.0.0.0/tcp/33433",
         "--rpc-cors", "all",
-        "--rpc-methods", "safe",
-        "--unsafe-ws-external",
-        "--dsn-disable-private-ips",
+        "--rpc-methods", "unsafe",
+        "--rpc-external",
         "--no-private-ipv4",
         "--validator",
-        "--name", "$SUBSPACE_NODE_NAME2"
+        "--name", "$SUBSPACE_NODE_NAME"
       ]
       healthcheck:
         timeout: 5s
         interval: 30s
-        retries: 5
+        retries: 60
 
     farmer:
       depends_on:
@@ -254,16 +250,14 @@ sleep 1
       volumes:
         - farmer-data:/var/subspace:rw
       ports:
-        - "0.0.0.0:41533:41533"
+        - "0.0.0.0:33533:33533"
       restart: unless-stopped
       command: [
-        "--base-path", "/var/subspace",
         "farm",
-        "--disable-private-ips",
         "--node-rpc-url", "ws://node:9944",
-        "--listen-on", "/ip4/0.0.0.0/tcp/41533",
-        "--reward-address", "${SUBSPACE_WALLET_ADDRESS2}",
-        "--plot-size", "$SUBSPACE_PLOT_SIZE2"
+        "--listen-on", "/ip4/0.0.0.0/tcp/33533",
+        "--reward-address", "${SUBSPACE_WALLET_ADDRESS}",
+        "path=/var/subspace,size=$SUBSPACE_PLOT_SIZE",
       ]
   volumes:
     node-data:
@@ -301,7 +295,7 @@ fi
 cd $HOME/subspace3
 sleep 1
  # Create script 
-  tee $HOME/subspace3/docker-compose.yml > /dev/null <<EOF
+  tee $HOME/subspace/docker-compose.yml > /dev/null <<EOF
   version: "3.7"
   services:
     node:
@@ -309,29 +303,28 @@ sleep 1
       volumes:
         - node-data:/var/subspace:rw
       ports:
-        - "0.0.0.0:42333:42333"
-        - "0.0.0.0:42433:42433"
+        - "0.0.0.0:34333:34333"
+        - "0.0.0.0:34433:34433"
       restart: unless-stopped
       command: [
         "--chain", "$chain",
         "--base-path", "/var/subspace",
         "--execution", "wasm",
-        "--blocks-pruning", "archive",
+        "--blocks-pruning", "256",
         "--state-pruning", "archive",
-        "--port", "42333",
-        "--dsn-listen-on", "/ip4/0.0.0.0/tcp/42433",
+        "--port", "34333",
+        "--dsn-listen-on", "/ip4/0.0.0.0/tcp/34433",
         "--rpc-cors", "all",
-        "--rpc-methods", "safe",
-        "--unsafe-ws-external",
-        "--dsn-disable-private-ips",
+        "--rpc-methods", "unsafe",
+        "--rpc-external",
         "--no-private-ipv4",
         "--validator",
-        "--name", "$SUBSPACE_NODE_NAME3"
+        "--name", "$SUBSPACE_NODE_NAME"
       ]
       healthcheck:
         timeout: 5s
         interval: 30s
-        retries: 5
+        retries: 60
 
     farmer:
       depends_on:
@@ -341,16 +334,14 @@ sleep 1
       volumes:
         - farmer-data:/var/subspace:rw
       ports:
-        - "0.0.0.0:42533:42533"
+        - "0.0.0.0:34533:34533"
       restart: unless-stopped
       command: [
-        "--base-path", "/var/subspace",
         "farm",
-        "--disable-private-ips",
         "--node-rpc-url", "ws://node:9944",
-        "--listen-on", "/ip4/0.0.0.0/tcp/42533",
-        "--reward-address", "${SUBSPACE_WALLET_ADDRESS3}",
-        "--plot-size", "$SUBSPACE_PLOT_SIZE3"
+        "--listen-on", "/ip4/0.0.0.0/tcp/34533",
+        "--reward-address", "${SUBSPACE_WALLET_ADDRESS}",
+        "path=/var/subspace,size=$SUBSPACE_PLOT_SIZE",
       ]
   volumes:
     node-data:
@@ -388,7 +379,7 @@ fi
 cd $HOME/subspace4
 sleep 1
  # Create script 
-  tee $HOME/subspace4/docker-compose.yml > /dev/null <<EOF
+  tee $HOME/subspace/docker-compose.yml > /dev/null <<EOF
   version: "3.7"
   services:
     node:
@@ -396,29 +387,28 @@ sleep 1
       volumes:
         - node-data:/var/subspace:rw
       ports:
-        - "0.0.0.0:43333:43333"
-        - "0.0.0.0:43433:43433"
+        - "0.0.0.0:35333:35333"
+        - "0.0.0.0:35433:35433"
       restart: unless-stopped
       command: [
         "--chain", "$chain",
         "--base-path", "/var/subspace",
         "--execution", "wasm",
-        "--blocks-pruning", "archive",
+        "--blocks-pruning", "256",
         "--state-pruning", "archive",
-        "--port", "43333",
-        "--dsn-listen-on", "/ip4/0.0.0.0/tcp/43433",
+        "--port", "35333",
+        "--dsn-listen-on", "/ip4/0.0.0.0/tcp/35433",
         "--rpc-cors", "all",
-        "--rpc-methods", "safe",
-        "--unsafe-ws-external",
-        "--dsn-disable-private-ips",
+        "--rpc-methods", "unsafe",
+        "--rpc-external",
         "--no-private-ipv4",
         "--validator",
-        "--name", "$SUBSPACE_NODE_NAME4"
+        "--name", "$SUBSPACE_NODE_NAME"
       ]
       healthcheck:
         timeout: 5s
         interval: 30s
-        retries: 5
+        retries: 60
 
     farmer:
       depends_on:
@@ -428,16 +418,14 @@ sleep 1
       volumes:
         - farmer-data:/var/subspace:rw
       ports:
-        - "0.0.0.0:43533:43533"
+        - "0.0.0.0:35533:35533"
       restart: unless-stopped
       command: [
-        "--base-path", "/var/subspace",
         "farm",
-        "--disable-private-ips",
         "--node-rpc-url", "ws://node:9944",
-        "--listen-on", "/ip4/0.0.0.0/tcp/43533",
-        "--reward-address", "${SUBSPACE_WALLET_ADDRESS4}",
-        "--plot-size", "$SUBSPACE_PLOT_SIZE4"
+        "--listen-on", "/ip4/0.0.0.0/tcp/35533",
+        "--reward-address", "${SUBSPACE_WALLET_ADDRESS}",
+        "path=/var/subspace,size=$SUBSPACE_PLOT_SIZE",
       ]
   volumes:
     node-data:
@@ -475,7 +463,7 @@ fi
 cd $HOME/subspace5
 sleep 1
  # Create script 
-  tee $HOME/subspace5/docker-compose.yml > /dev/null <<EOF
+  tee $HOME/subspace/docker-compose.yml > /dev/null <<EOF
   version: "3.7"
   services:
     node:
@@ -483,29 +471,28 @@ sleep 1
       volumes:
         - node-data:/var/subspace:rw
       ports:
-        - "0.0.0.0:44333:44333"
-        - "0.0.0.0:44433:44433"
+        - "0.0.0.0:36333:36333"
+        - "0.0.0.0:36433:36433"
       restart: unless-stopped
       command: [
         "--chain", "$chain",
         "--base-path", "/var/subspace",
         "--execution", "wasm",
-        "--blocks-pruning", "archive",
+        "--blocks-pruning", "256",
         "--state-pruning", "archive",
-        "--port", "44333",
-        "--dsn-listen-on", "/ip4/0.0.0.0/tcp/44433",
+        "--port", "36333",
+        "--dsn-listen-on", "/ip4/0.0.0.0/tcp/36433",
         "--rpc-cors", "all",
-        "--rpc-methods", "safe",
-        "--unsafe-ws-external",
-        "--dsn-disable-private-ips",
+        "--rpc-methods", "unsafe",
+        "--rpc-external",
         "--no-private-ipv4",
         "--validator",
-        "--name", "$SUBSPACE_NODE_NAME5"
+        "--name", "$SUBSPACE_NODE_NAME"
       ]
       healthcheck:
         timeout: 5s
         interval: 30s
-        retries: 5
+        retries: 60
 
     farmer:
       depends_on:
@@ -515,16 +502,14 @@ sleep 1
       volumes:
         - farmer-data:/var/subspace:rw
       ports:
-        - "0.0.0.0:44533:44533"
+        - "0.0.0.0:36533:36533"
       restart: unless-stopped
       command: [
-        "--base-path", "/var/subspace",
         "farm",
-        "--disable-private-ips",
         "--node-rpc-url", "ws://node:9944",
-        "--listen-on", "/ip4/0.0.0.0/tcp/44533",
-        "--reward-address", "${SUBSPACE_WALLET_ADDRESS5}",
-        "--plot-size", "$SUBSPACE_PLOT_SIZE5"
+        "--listen-on", "/ip4/0.0.0.0/tcp/36533",
+        "--reward-address", "${SUBSPACE_WALLET_ADDRESS}",
+        "path=/var/subspace,size=$SUBSPACE_PLOT_SIZE",
       ]
   volumes:
     node-data:
