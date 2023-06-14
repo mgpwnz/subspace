@@ -1,6 +1,6 @@
 #!/bin/bash
 # Default variables
-version="gemini-3d-2023-may-23"
+version="gemini-3d-2023-jun-14"
 chain="gemini-3d"
 function="install"
 # Options
