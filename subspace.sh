@@ -92,18 +92,18 @@ sleep 1
       restart: unless-stopped
       command: [
         "--chain", "$chain",
-        "--base-path", "/var/subspace",
         "--execution", "wasm",
         "--blocks-pruning", "archive",
         "--state-pruning", "archive",
-        "--port", "32333",
-        "--dsn-listen-on", "/ip4/0.0.0.0/tcp/32433",
-        "--rpc-cors", "all",
-        "--rpc-methods", "safe",
-        "--unsafe-ws-external",
         "--dsn-disable-private-ips",
         "--no-private-ipv4",
         "--validator",
+        "--base-path", "/var/subspace",
+        "--prometheus-external",
+        "--prometheus-port", "9615",
+        "--rpc-cors", "all",
+        "--unsafe-rpc-external",
+        "--rpc-methods", "safe",
         "--name", "$SUBSPACE_NODE_NAME"
       ]
       healthcheck:
