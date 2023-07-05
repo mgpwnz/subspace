@@ -2,7 +2,7 @@
 # Default variables
 function="install"
 repo=v0.5.1-alpha
-version=v3-v0.5.1-alpha
+version=v2-v0.5.1-alpha
 # Options
 option_value(){ echo "$1" | sed -e 's%^--[^=]*=%%g; s%^-[^=]*=%%g'; }
 while test $# -gt 0; do
