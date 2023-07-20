@@ -1,8 +1,8 @@
 #!/bin/bash
 # Default variables
 function="install"
-repo=v0.5.1-alpha-2
-version=v2-v0.5.1-alpha-2
+repo=v0.5.3-alpha-2
+version=v2-v0.5.3-alpha-2
 # Options
 option_value(){ echo "$1" | sed -e 's%^--[^=]*=%%g; s%^-[^=]*=%%g'; }
 while test $# -gt 0; do
