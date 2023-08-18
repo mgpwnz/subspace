@@ -121,7 +121,6 @@ sleep 1
         - "0.0.0.0:32533:32533"
       restart: unless-stopped
       command: [
-        "--base-path", "/var/subspace",
         "farm",
         "--node-rpc-url", "ws://node:9944",
         "--listen-on", "/ip4/0.0.0.0/tcp/32533",
