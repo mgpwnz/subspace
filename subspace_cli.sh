@@ -1,8 +1,8 @@
 #!/bin/bash
 # Default variables
 function="install"
-repo=v0.5.3-alpha-2
-version=v2-v0.5.3-alpha-2
+repo=v0.6.0-alpha
+version=skylake-v0.6.0-alpha
 # Options
 option_value(){ echo "$1" | sed -e 's%^--[^=]*=%%g; s%^-[^=]*=%%g'; }
 while test $# -gt 0; do
@@ -35,7 +35,7 @@ sleep 2
 mkdir $HOME/subspace
 cd $HOME/subspace
 #download cli
-wget https://github.com/subspace/subspace-cli/releases/download/${repo}/subspace-cli-ubuntu-x86_64-${version} && \
+wget https://github.com/subspace/pulsar/releases/download/${repo}/pulsar-ubuntu-x86_64-${version} && \
 chmod +x subspace-cli-ubuntu-x86_64-${version} && \
 ./subspace-cli-ubuntu-x86_64-${version} init
 sleep 2
