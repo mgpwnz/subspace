@@ -2,7 +2,7 @@
 # Default variables
 version="gemini-3f-2023-aug-18"
 chain="gemini-3f"
-function="install"
+function="install1"
 # Options
 option_value(){ echo "$1" | sed -e 's%^--[^=]*=%%g; s%^-[^=]*=%%g'; }
 while test $# -gt 0; do
