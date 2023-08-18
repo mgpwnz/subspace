@@ -211,7 +211,7 @@ fi
 cd $HOME/subspace2
 sleep 1
  # Create script 
-  tee $HOME/subspace/docker-compose.yml > /dev/null <<EOF
+  tee $HOME/subspace2/docker-compose.yml > /dev/null <<EOF
   version: "3.7"
   services:
     node:
@@ -295,7 +295,7 @@ fi
 cd $HOME/subspace3
 sleep 1
  # Create script 
-  tee $HOME/subspace/docker-compose.yml > /dev/null <<EOF
+  tee $HOME/subspace3/docker-compose.yml > /dev/null <<EOF
   version: "3.7"
   services:
     node:
@@ -379,7 +379,7 @@ fi
 cd $HOME/subspace4
 sleep 1
  # Create script 
-  tee $HOME/subspace/docker-compose.yml > /dev/null <<EOF
+  tee $HOME/subspace4/docker-compose.yml > /dev/null <<EOF
   version: "3.7"
   services:
     node:
@@ -463,7 +463,7 @@ fi
 cd $HOME/subspace5
 sleep 1
  # Create script 
-  tee $HOME/subspace/docker-compose.yml > /dev/null <<EOF
+  tee $HOME/subspace5/docker-compose.yml > /dev/null <<EOF
   version: "3.7"
   services:
     node:
