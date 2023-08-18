@@ -36,14 +36,14 @@ mkdir $HOME/subspace
 cd $HOME/subspace
 #download cli
 wget https://github.com/subspace/pulsar/releases/download/${repo}/pulsar-ubuntu-x86_64-${version} && \
-chmod +x subspace-cli-ubuntu-x86_64-${version} && \
+chmod +x pulsar-ubuntu-x86_64-${version} && \
 ./subspace-cli-ubuntu-x86_64-${version} init
 sleep 2
 #Change ports
-sed -i -e "s/9933/19999/g" $HOME/.config/subspace-cli/settings.toml && \
-sed -i -e "s/9944/19998/g" $HOME/.config/subspace-cli/settings.toml && \
-sed -i -e "s/30333/19997/g" $HOME/.config/subspace-cli/settings.toml && \
-sed -i -e "s/30433/19996/g" $HOME/.config/subspace-cli/settings.toml
+sed -i -e "s/9933/19999/g" $HOME/.config/pulsar/settings.toml && \
+sed -i -e "s/9944/19998/g" $HOME/.config/pulsar/settings.toml && \
+sed -i -e "s/30333/19997/g" $HOME/.config/pulsar/settings.toml && \
+sed -i -e "s/30433/19996/g" $HOME/.config/pulsar/settings.toml
 #service
 cd $HOME
 echo "[Unit]
@@ -53,7 +53,7 @@ After=network.target
 Type=simple
 User=$USER
 WorkingDirectory=/root/subspace/
-ExecStart=/root/subspace/subspace-cli-ubuntu-x86_64-${version} farm  --verbose
+ExecStart=/root/subspace/pulsar-ubuntu-x86_64-${version} farm  --verbose
 Restart=always
 RestartSec=10
 LimitNOFILE=1024000
@@ -79,22 +79,22 @@ done
 uninstall() {
 sudo systemctl disable subspace &> /dev/null
 sudo systemctl stop subspace  &> /dev/null  
-sudo rm -rf $HOME/subspace $HOME/.config/subspace* &> /dev/null
-sudo rm -rf $HOME/.local/share/subspace-cli/ &> /dev/null
+sudo rm -rf $HOME/subspace $HOME/.config/pulsar* &> /dev/null
+sudo rm -rf $HOME/.local/share/pulsar/ &> /dev/null
 echo "Done"
 cd $HOME
 }
 update() {
-installed=$( ls $HOME/subspace | sed -e "s%subspace-cli-ubuntu-x86_64-v%v%")
+installed=$( ls $HOME/subspace | sed -e "s%pulsar-ubuntu-x86_64-v%v%")
 if [ ! -d $HOME/subspace ]; then
 echo Need install node!
 elif [[ ${version} != ${installed} ]]; then
 cd $HOME/subspace
-rm subspace-cli-ubuntu*
+rm pulsar-ubuntu*
 #download cli
-wget https://github.com/subspace/subspace-cli/releases/download/${repo}/subspace-cli-ubuntu-x86_64-${version} && \
-chmod +x subspace-cli-ubuntu-x86_64-${version} && \
-sed -i -e "s/subspace-cli-ubuntu-x86_64-.*/subspace-cli-ubuntu-x86_64-${version} farm  --verbose/g" /etc/systemd/system/subspace.service
+wget https://github.com/subspace/pulsar/releases/download/${repo}/pulsar-ubuntu-x86_64-${version} && \
+chmod +x pulsar-ubuntu-x86_64-${version} && \
+sed -i -e "s/pulsar-ubuntu-x86_64-.*/pulsar-ubuntu-x86_64-${version} farm  --verbose/g" /etc/systemd/system/subspace.service
 sudo systemctl daemon-reload
 echo -e '\n\e[42mRunning a service\e[0m\n' && sleep 1 
 sudo systemctl enable subspace
@@ -110,12 +110,12 @@ if [ ! -d $HOME/subspace ]; then
 echo Need install node!
 else
 cd $HOME/subspace
-rm subspace-cli-ubuntu*
-wget https://github.com/subspace/subspace-cli/releases/download/${repo}/subspace-cli-ubuntu-x86_64-${version} && \
-chmod +x subspace-cli-ubuntu-x86_64-${version} && \
-./subspace-cli-ubuntu-x86_64-* wipe
-./subspace-cli-ubuntu-x86_64-* init
-sed -i -e "s/subspace-cli-ubuntu-x86_64-.*/subspace-cli-ubuntu-x86_64-${version} farm  --verbose/g" /etc/systemd/system/subspace.service
+rm pulsar-ubuntu*
+wget https://github.com/subspace/pulsar/releases/download/${repo}/pulsar-ubuntu-x86_64-${version} && \
+chmod +x pulsar-ubuntu-x86_64-${version} && \
+./pulsar-ubuntu-x86_64-* wipe
+./pulsar-ubuntu-x86_64-* init
+sed -i -e "s/pulsar-ubuntu-x86_64-.*/pulsar-ubuntu-x86_64-${version} farm  --verbose/g" /etc/systemd/system/subspace.service
 sudo systemctl daemon-reload
 echo -e '\n\e[42mRunning a service\e[0m\n' && sleep 1 
 sudo systemctl enable subspace
