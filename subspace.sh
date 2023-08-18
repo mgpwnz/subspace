@@ -142,13 +142,22 @@ update() {
 if [  -d $HOME/subspace ]; then
 cd $HOME/subspace
 sed -i.bak "s/:gemini-3d-2023.*/:$version/" docker-compose.yml
-. <(wget -qO- https://raw.githubusercontent.com/mgpwnz/subspace/main/subspace_up.sh)
+docker compose down
+sleep 2
+docker compose pull
+sleep 2
+docker compose up -d
+#dialog
+#. <(wget -qO- https://raw.githubusercontent.com/mgpwnz/subspace/main/subspace_up.sh)
 cd
 fi
 }
 uninstall() {
 cd $HOME/subspace
-. <(wget -qO- https://raw.githubusercontent.com/mgpwnz/subspace/main/subspace_un.sh)
+docker compose down -v
+sleep 2
+#dialog
+#. <(wget -qO- https://raw.githubusercontent.com/mgpwnz/subspace/main/subspace_un.sh)
 sudo rm -rf $HOME/subspace 
 echo "Done"
 cd
