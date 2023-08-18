@@ -80,7 +80,9 @@ uninstall() {
 sudo systemctl disable subspace &> /dev/null
 sudo systemctl stop subspace  &> /dev/null  
 sudo rm -rf $HOME/subspace $HOME/.config/pulsar* &> /dev/null
+sudo rm -rf $HOME/subspace $HOME/.config/subspace* &> /dev/null
 sudo rm -rf $HOME/.local/share/pulsar/ &> /dev/null
+sudo rm -rf $HOME/.local/share/subspace-cli/ &> /dev/null
 echo "Done"
 cd $HOME
 }
