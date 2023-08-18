@@ -158,6 +158,7 @@ sleep 2
 #dialog
 #. <(wget -qO- https://raw.githubusercontent.com/mgpwnz/subspace/main/subspace_un.sh)
 sudo rm -rf $HOME/subspace 
+unset SUBSPACE_PLOT_SIZE
 echo "Done"
 cd
 }
