@@ -37,7 +37,7 @@ cd $HOME/subspace
 #download cli
 wget https://github.com/subspace/pulsar/releases/download/${repo}/pulsar-ubuntu-x86_64-${version} && \
 chmod +x pulsar-ubuntu-x86_64-${version} && \
-./subspace-cli-ubuntu-x86_64-${version} init
+./pulsar-ubuntu-x86_64-${version} init
 sleep 2
 #Change ports
 sed -i -e "s/9933/19999/g" $HOME/.config/pulsar/settings.toml && \
