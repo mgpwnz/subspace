@@ -92,24 +92,23 @@ sleep 1
       restart: unless-stopped
       command: [
         "--chain", "$chain",
+        "--base-path", "/var/subspace",
         "--execution", "wasm",
-        "--blocks-pruning", "archive",
+        "--blocks-pruning", "256",
         "--state-pruning", "archive",
-        "--dsn-disable-private-ips",
+        "--port", "32333",
+        "--dsn-listen-on", "/ip4/0.0.0.0/tcp/32433",
+        "--rpc-cors", "all",
+        "--rpc-methods", "unsafe",
+        "--rpc-external",
         "--no-private-ipv4",
         "--validator",
-        "--base-path", "/var/subspace",
-        "--prometheus-external",
-        "--prometheus-port", "9615",
-        "--rpc-cors", "all",
-        "--unsafe-rpc-external",
-        "--rpc-methods", "safe",
         "--name", "$SUBSPACE_NODE_NAME"
       ]
       healthcheck:
         timeout: 5s
         interval: 30s
-        retries: 5
+        retries: 60
 
     farmer:
       depends_on:
@@ -124,11 +123,10 @@ sleep 1
       command: [
         "--base-path", "/var/subspace",
         "farm",
-        "--disable-private-ips",
         "--node-rpc-url", "ws://node:9944",
         "--listen-on", "/ip4/0.0.0.0/tcp/32533",
         "--reward-address", "${SUBSPACE_WALLET_ADDRESS}",
-        "--plot-size", "$SUBSPACE_PLOT_SIZE"
+        "path=/var/subspace,size=$SUBSPACE_PLOT_SIZE",
       ]
   volumes:
     node-data:
