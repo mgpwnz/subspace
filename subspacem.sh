@@ -235,7 +235,7 @@ sleep 1
         "--rpc-external",
         "--no-private-ipv4",
         "--validator",
-        "--name", "$SUBSPACE_NODE_NAME"
+        "--name", "$SUBSPACE_NODE_NAME2"
       ]
       healthcheck:
         timeout: 5s
@@ -256,8 +256,8 @@ sleep 1
         "farm",
         "--node-rpc-url", "ws://node:9944",
         "--listen-on", "/ip4/0.0.0.0/tcp/33533",
-        "--reward-address", "${SUBSPACE_WALLET_ADDRESS}",
-        "path=/var/subspace,size=$SUBSPACE_PLOT_SIZE",
+        "--reward-address", "${SUBSPACE_WALLET_ADDRESS2}",
+        "path=/var/subspace,size=$SUBSPACE_PLOT_SIZE2",
       ]
   volumes:
     node-data:
@@ -319,7 +319,7 @@ sleep 1
         "--rpc-external",
         "--no-private-ipv4",
         "--validator",
-        "--name", "$SUBSPACE_NODE_NAME"
+        "--name", "$SUBSPACE_NODE_NAME3"
       ]
       healthcheck:
         timeout: 5s
@@ -340,8 +340,8 @@ sleep 1
         "farm",
         "--node-rpc-url", "ws://node:9944",
         "--listen-on", "/ip4/0.0.0.0/tcp/34533",
-        "--reward-address", "${SUBSPACE_WALLET_ADDRESS}",
-        "path=/var/subspace,size=$SUBSPACE_PLOT_SIZE",
+        "--reward-address", "${SUBSPACE_WALLET_ADDRESS3}",
+        "path=/var/subspace,size=$SUBSPACE_PLOT_SIZE3",
       ]
   volumes:
     node-data:
@@ -403,7 +403,7 @@ sleep 1
         "--rpc-external",
         "--no-private-ipv4",
         "--validator",
-        "--name", "$SUBSPACE_NODE_NAME"
+        "--name", "$SUBSPACE_NODE_NAME4"
       ]
       healthcheck:
         timeout: 5s
@@ -424,8 +424,8 @@ sleep 1
         "farm",
         "--node-rpc-url", "ws://node:9944",
         "--listen-on", "/ip4/0.0.0.0/tcp/35533",
-        "--reward-address", "${SUBSPACE_WALLET_ADDRESS}",
-        "path=/var/subspace,size=$SUBSPACE_PLOT_SIZE",
+        "--reward-address", "${SUBSPACE_WALLET_ADDRESS4}",
+        "path=/var/subspace,size=$SUBSPACE_PLOT_SIZE4",
       ]
   volumes:
     node-data:
@@ -487,7 +487,7 @@ sleep 1
         "--rpc-external",
         "--no-private-ipv4",
         "--validator",
-        "--name", "$SUBSPACE_NODE_NAME"
+        "--name", "$SUBSPACE_NODE_NAME5"
       ]
       healthcheck:
         timeout: 5s
@@ -508,8 +508,8 @@ sleep 1
         "farm",
         "--node-rpc-url", "ws://node:9944",
         "--listen-on", "/ip4/0.0.0.0/tcp/36533",
-        "--reward-address", "${SUBSPACE_WALLET_ADDRESS}",
-        "path=/var/subspace,size=$SUBSPACE_PLOT_SIZE",
+        "--reward-address", "${SUBSPACE_WALLET_ADDRESS5}",
+        "path=/var/subspace,size=$SUBSPACE_PLOT_SIZE5",
       ]
   volumes:
     node-data:
