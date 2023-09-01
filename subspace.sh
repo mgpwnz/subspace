@@ -140,7 +140,7 @@ docker compose up -d && docker compose logs -f --tail 1000
 update() {
 if [  -d $HOME/subspace ]; then
 cd $HOME/subspace
-sed -i.bak "s/:gemini-3d-2023.*/:$version/" docker-compose.yml
+sed -i.bak "s/:gemini-3f-2023.*/:$version/" docker-compose.yml
 docker compose down
 sleep 2
 docker compose pull
