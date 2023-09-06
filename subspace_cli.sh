@@ -1,8 +1,8 @@
 #!/bin/bash
 # Default variables
 function="install"
-repo=v0.6.5-alpha
-version=skylake-v0.6.5-alpha
+repo=v0.6.6-alpha
+version=skylake-v0.6.6-alpha
 # Options
 option_value(){ echo "$1" | sed -e 's%^--[^=]*=%%g; s%^-[^=]*=%%g'; }
 while test $# -gt 0; do
