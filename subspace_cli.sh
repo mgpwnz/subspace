@@ -39,11 +39,7 @@ wget https://github.com/subspace/pulsar/releases/download/${repo}/pulsar-ubuntu-
 chmod +x pulsar-ubuntu-x86_64-${version} && \
 ./pulsar-ubuntu-x86_64-${version} init
 sleep 2
-#Change ports
-sed -i -e "s/9933/19999/g" $HOME/.config/pulsar/settings.toml && \
-sed -i -e "s/9944/19998/g" $HOME/.config/pulsar/settings.toml && \
-sed -i -e "s/30333/19997/g" $HOME/.config/pulsar/settings.toml && \
-sed -i -e "s/30433/19996/g" $HOME/.config/pulsar/settings.toml
+
 #service
 cd $HOME
 echo "[Unit]
