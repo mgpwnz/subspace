@@ -140,7 +140,62 @@ docker compose up -d && docker compose logs -f --tail 1000
 update() {
 if [  -d $HOME/subspace ]; then
 cd $HOME/subspace
-sed -i.bak "s/:gemini-3.*/:$version/" docker-compose.yml
+rm docker-compose.yml
+sleep 1
+tee $HOME/subspace/docker-compose.yml > /dev/null <<EOF
+version: "3.7"
+services:
+  node:
+    image: ghcr.io/subspace/node:$version
+    volumes:
+      - node-data:/var/subspace:rw
+    ports:
+      - "0.0.0.0:30333:30333"
+      - "0.0.0.0:30433:30433"
+    restart: unless-stopped
+    command:
+      [
+        "--chain", "gemini-3f",
+        "--base-path", "/var/subspace",
+        "--execution", "wasm",
+        "--blocks-pruning", "256",
+        "--state-pruning", "archive",
+        "--port", "30333",
+        "--dsn-listen-on", "/ip4/0.0.0.0/tcp/30433",
+        "--rpc-cors", "all",
+        "--rpc-methods", "unsafe",
+        "--rpc-external",
+        "--validator",
+        "--name", "$SUBSPACE_NODE_NAME"
+      ]
+    healthcheck:
+      timeout: 5s
+      interval: 30s
+      retries: 60
+
+  farmer:
+    depends_on:
+      node:
+        condition: service_healthy
+    image: ghcr.io/subspace/farmer:$version
+    volumes:
+      - farmer-data:/var/subspace:rw
+    ports:
+      - "0.0.0.0:30533:30533"
+    restart: unless-stopped
+    command:
+      [
+        "farm",
+        "--node-rpc-url", "ws://node:9944",
+        "--listen-on", "/ip4/0.0.0.0/tcp/30533",
+        "--reward-address", "${SUBSPACE_WALLET_ADDRESS}",
+        "path=/var/subspace,size=$SUBSPACE_PLOT_SIZE"
+      ]
+volumes:
+  node-data:
+  farmer-data:            
+EOF
+sleep 1
 docker compose down
 sleep 2
 docker compose pull
