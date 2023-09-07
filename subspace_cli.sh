@@ -2,7 +2,6 @@
 # Default variables
 function="install"
 repo=v0.6.6-alpha
-version=skylake-v0.6.6-alpha
 # Options
 option_value(){ echo "$1" | sed -e 's%^--[^=]*=%%g; s%^-[^=]*=%%g'; }
 while test $# -gt 0; do
@@ -19,25 +18,20 @@ while test $# -gt 0; do
             function="update"
             shift
             ;;
-        -upg|--upgrade)
-            function="upgrade"
-            shift
-            ;;
         *|--)
 		break
 		;;
 	esac
 done
 install() {
-while [ ! -d $HOME/subspace ]; do
+cd $HOME
 sudo apt-get install wget jq ocl-icd-opencl-dev libopencl-clang-dev libgomp1 ocl-icd-libopencl1 -y
 sleep 2
-mkdir $HOME/subspace
-cd $HOME/subspace
 #download cli
-wget https://github.com/subspace/pulsar/releases/download/${repo}/pulsar-ubuntu-x86_64-${version} && \
-chmod +x pulsar-ubuntu-x86_64-${version} && \
-./pulsar-ubuntu-x86_64-${version} init
+wget -O pulsar https://github.com/subspace/pulsar/releases/download/${repo}/pulsar-ubuntu-x86_64-skylake-${repo} 
+chmod +x pulsar 
+mv pulsar /usr/local/bin/
+./pulsar init
 sleep 2
 
 #service
@@ -49,7 +43,7 @@ After=network.target
 Type=simple
 User=$USER
 WorkingDirectory=/root/subspace/
-ExecStart=/root/subspace/pulsar-ubuntu-x86_64-${version} farm  --verbose
+ExecStart=/usr/local/bin/pulsar farm  --verbose
 Restart=always
 RestartSec=10
 LimitNOFILE=1024000
@@ -70,29 +64,23 @@ if [[ `service subspace status | grep active` =~ "running" ]]; then
 else
  echo -e "Your subspace node \e[31mwas not installed correctly\e[39m, please reinstall."
  fi
-done
 }
 uninstall() {
 sudo systemctl disable subspace &> /dev/null
 sudo systemctl stop subspace  &> /dev/null  
-sudo rm -rf $HOME/subspace $HOME/.config/pulsar* &> /dev/null
-sudo rm -rf $HOME/subspace $HOME/.config/subspace* &> /dev/null
+sudo rm -rf $HOME/.config/pulsar* &> /dev/null
 sudo rm -rf $HOME/.local/share/pulsar/ &> /dev/null
 sudo rm -rf $HOME/.local/share/subspace-cli/ &> /dev/null
+sudo rm /usr/local/bin/pulsar
 echo "Done"
 cd $HOME
 }
 update() {
-installed=$( ls $HOME/subspace | sed -e "s%pulsar-ubuntu-x86_64-v%v%")
-if [ ! -d $HOME/subspace ]; then
-echo Need install node!
-elif [[ ${version} != ${installed} ]]; then
-cd $HOME/subspace
-rm pulsar-ubuntu*
+cd $HOME
 #download cli
-wget https://github.com/subspace/pulsar/releases/download/${repo}/pulsar-ubuntu-x86_64-${version} && \
-chmod +x pulsar-ubuntu-x86_64-${version} && \
-sed -i -e "s/pulsar-ubuntu-x86_64-.*/pulsar-ubuntu-x86_64-${version} farm  --verbose/g" /etc/systemd/system/subspace.service
+wget -O pulsar https://github.com/subspace/pulsar/releases/download/${repo}/pulsar-ubuntu-x86_64-skylake-${repo} 
+chmod +x pulsar 
+mv pulsar /usr/local/bin/
 sudo systemctl daemon-reload
 echo -e '\n\e[42mRunning a service\e[0m\n' && sleep 1 
 sudo systemctl enable subspace
@@ -101,25 +89,6 @@ echo -e "Your subspace node \e[32mUpdate\e[39m!"
 cd $HOME
 else
 echo -e "Your Subspace node \e[32mlast version\e[39m!"
-fi
-}
-upgrade() {
-if [ ! -d $HOME/subspace ]; then
-echo Need install node!
-else
-cd $HOME/subspace
-rm pulsar-ubuntu*
-wget https://github.com/subspace/pulsar/releases/download/${repo}/pulsar-ubuntu-x86_64-${version} && \
-chmod +x pulsar-ubuntu-x86_64-${version} && \
-./pulsar-ubuntu-x86_64-* wipe
-./pulsar-ubuntu-x86_64-* init
-sed -i -e "s/pulsar-ubuntu-x86_64-.*/pulsar-ubuntu-x86_64-${version} farm  --verbose/g" /etc/systemd/system/subspace.service
-sudo systemctl daemon-reload
-echo -e '\n\e[42mRunning a service\e[0m\n' && sleep 1 
-sudo systemctl enable subspace
-sudo systemctl restart subspace
-echo -e "Your subspace node \e[32mUpgrade\e[39m!"
-cd $HOME
 fi
 }
 # Actions
