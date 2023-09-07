@@ -42,7 +42,7 @@ After=network.target
 [Service]
 Type=simple
 User=$USER
-WorkingDirectory=/root/subspace/
+WorkingDirectory=/usr/local/bin/
 ExecStart=/usr/local/bin/pulsar farm  --verbose
 Restart=always
 RestartSec=10
