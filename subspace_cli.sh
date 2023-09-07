@@ -66,6 +66,7 @@ else
 uninstall() {
 sudo systemctl disable subspace &> /dev/null
 sudo systemctl stop subspace  &> /dev/null  
+sudo rm -rf $HOME/subspace &> /dev/null
 sudo rm -rf $HOME/.config/pulsar* &> /dev/null
 sudo rm -rf $HOME/.local/share/pulsar/ &> /dev/null
 sudo rm -rf $HOME/.local/share/subspace-cli/ &> /dev/null
@@ -85,6 +86,7 @@ sudo systemctl enable subspace
 sudo systemctl restart subspace
 echo -e "Your subspace node \e[32mUpdate\e[39m!"
 cd $HOME
+journalctl -fu subspace
 }
 # Actions
 sudo apt install wget -y &>/dev/null
