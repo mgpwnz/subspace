@@ -31,7 +31,7 @@ sleep 2
 wget -O pulsar https://github.com/subspace/pulsar/releases/download/${repo}/pulsar-ubuntu-x86_64-skylake-${repo} 
 chmod +x pulsar 
 mv pulsar /usr/local/bin/
-./pulsar init
+pulsar init
 sleep 2
 
 #service
