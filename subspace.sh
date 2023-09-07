@@ -1,7 +1,6 @@
 #!/bin/bash
 # Default variables
 version="gemini-3f-2023-sep-05"
-chain="gemini-3f"
 function="install"
 # Options
 option_value(){ echo "$1" | sed -e 's%^--[^=]*=%%g; s%^-[^=]*=%%g'; }
@@ -78,58 +77,59 @@ mkdir $HOME/subspace
 fi
 cd $HOME/subspace
 sleep 1
- # Create script 
-  tee $HOME/subspace/docker-compose.yml > /dev/null <<EOF
-  version: "3.7"
-  services:
-    node:
-      image: ghcr.io/subspace/node:$version
-      volumes:
-        - node-data:/var/subspace:rw
-      ports:
-        - "0.0.0.0:32333:32333"
-        - "0.0.0.0:32433:32433"
-      restart: unless-stopped
-      command: [
-        "--chain", "$chain",
+# Create script 
+tee $HOME/subspace/docker-compose.yml > /dev/null <<EOF
+version: "3.7"
+services:
+  node:
+    image: ghcr.io/subspace/node:$version
+    volumes:
+      - node-data:/var/subspace:rw
+    ports:
+      - "0.0.0.0:30333:30333"
+      - "0.0.0.0:30433:30433"
+    restart: unless-stopped
+    command:
+      [
+        "--chain", "gemini-3f",
         "--base-path", "/var/subspace",
         "--execution", "wasm",
         "--blocks-pruning", "256",
         "--state-pruning", "archive",
-        "--port", "32333",
-        "--dsn-listen-on", "/ip4/0.0.0.0/tcp/32433",
+        "--port", "30333",
+        "--dsn-listen-on", "/ip4/0.0.0.0/tcp/30433",
         "--rpc-cors", "all",
         "--rpc-methods", "unsafe",
         "--rpc-external",
-        "--no-private-ipv4",
         "--validator",
         "--name", "$SUBSPACE_NODE_NAME"
       ]
-      healthcheck:
-        timeout: 5s
-        interval: 30s
-        retries: 60
+    healthcheck:
+      timeout: 5s
+      interval: 30s
+      retries: 60
 
-    farmer:
-      depends_on:
-        node:
-          condition: service_healthy
-      image: ghcr.io/subspace/farmer:$version
-      volumes:
-        - farmer-data:/var/subspace:rw
-      ports:
-        - "0.0.0.0:32533:32533"
-      restart: unless-stopped
-      command: [
+  farmer:
+    depends_on:
+      node:
+        condition: service_healthy
+    image: ghcr.io/subspace/farmer:$version
+    volumes:
+      - farmer-data:/var/subspace:rw
+    ports:
+      - "0.0.0.0:30533:30533"
+    restart: unless-stopped
+    command:
+      [
         "farm",
         "--node-rpc-url", "ws://node:9944",
-        "--listen-on", "/ip4/0.0.0.0/tcp/32533",
+        "--listen-on", "/ip4/0.0.0.0/tcp/30533",
         "--reward-address", "${SUBSPACE_WALLET_ADDRESS}",
-        "path=/var/subspace,size=$SUBSPACE_PLOT_SIZE",
+        "path=/var/subspace,size=$SUBSPACE_PLOT_SIZE"
       ]
-  volumes:
-    node-data:
-    farmer-data:
+volumes:
+  node-data:
+  farmer-data:            
 EOF
 sleep 2
 #docker run
