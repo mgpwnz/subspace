@@ -87,9 +87,6 @@ sudo systemctl enable subspace
 sudo systemctl restart subspace
 echo -e "Your subspace node \e[32mUpdate\e[39m!"
 cd $HOME
-else
-echo -e "Your Subspace node \e[32mlast version\e[39m!"
-fi
 }
 # Actions
 sudo apt install wget -y &>/dev/null
