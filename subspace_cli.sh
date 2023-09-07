@@ -42,10 +42,8 @@ After=network.target
 [Service]
 Type=simple
 User=$USER
-WorkingDirectory=/usr/local/bin/
 ExecStart=/usr/local/bin/pulsar farm  --verbose
-Restart=always
-RestartSec=10
+Restart=on-failure
 LimitNOFILE=1024000
 [Install]
 WantedBy=multi-user.target
@@ -61,6 +59,7 @@ if [[ `service subspace status | grep active` =~ "running" ]]; then
   echo -e "Your subspace node \e[32minstalled and works\e[39m!"
   echo -e "You can check node status by the command \e[7mservice subspace status\e[0m"
   echo -e "Use \e[7mjournalctl -fu subspace\e[0m for logs"
+  echo -e "Use \e[7mpulsar info\e[0m for status"
 else
  echo -e "Your subspace node \e[31mwas not installed correctly\e[39m, please reinstall."
  fi
