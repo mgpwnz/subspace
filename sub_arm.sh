@@ -20,14 +20,10 @@ echo -e "\e[1m\e[32m8. Enter Polkadot JS address to receive rewards \e[0m"
 read -p "Address: " ADDRESS
 echo -e "\e[1m\e[32m9. Enter Subspace Node name \e[0m"
 read -p "Node Name : " NODE_NAME
-echo -e "\e[1m\e[32m9. Enter Subspace Farmer Plot Size. For example 30G (means 30 Gigabyte) \e[0m"
-read -p "Plot Size : " PLOTSIZE
 
 echo -e "\e[1m\e[92m Node Name: \e[0m" $NODE_NAME
 
 echo -e "\e[1m\e[92m Address:  \e[0m" $ADDRESS
-
-echo -e "\e[1m\e[92m Plot Size:  \e[0m" $PLOTSIZE
 
 sleep 1
 #create service
@@ -36,7 +32,7 @@ Description=Subspace Node
 
 [Service]
 User=$USER
-ExecStart=subspace-node --chain gemini-2a --execution wasm --state-pruning archive --validator --name '$NODE_NAME'
+ExecStart=subspace-node  --chain gemini-3f  --blocks-pruning 256 --execution wasm --state-pruning archive --validator --name '$NODE_NAME'
 Restart=always
 RestartSec=10
 LimitNOFILE=10000
@@ -53,7 +49,7 @@ Description=Subspace Farmer
 
 [Service]
 User=$USER
-ExecStart=subspace-farmer farm --reward-address $ADDRESS --plot-size $PLOTSIZE
+ExecStart=subspace-farmer farm --reward-address $ADDRESS path=/root,size=200GiB
 Restart=always
 RestartSec=10
 LimitNOFILE=10000
