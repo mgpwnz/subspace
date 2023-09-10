@@ -2,6 +2,10 @@
 # Default variables
 function="install"
 version=gemini-3f-2023-sep-05
+plot1=5
+plot2=5
+plot3=10
+plot4=10
 # Options
 option_value(){ echo "$1" | sed -e 's%^--[^=]*=%%g; s%^-[^=]*=%%g'; }
 while test $# -gt 0; do
@@ -74,7 +78,7 @@ Description=Subspace Farmer
 
     [Service]
 User=$USER
-ExecStart=subspace-farmer farm --reward-address $ADDRESS path=/root/subspace_adv,size=5GiB path=/root/subspace_adv,size=5GiB path=/root/subspace_adv,size=10GiB path=/root/subspace_adv,size=10GiB
+ExecStart=subspace-farmer farm --reward-address $ADDRESS path=/root/subspace_adv,size=${plot1}GiB path=/root/subspace_adv,size=${plot2}GiB path=/root/subspace_adv,size=${plot3}GiB path=/root/subspace_adv,size=${plot4}GiB
 Restart=always
 RestartSec=10
 LimitNOFILE=10000
