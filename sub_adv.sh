@@ -109,10 +109,9 @@ WantedBy=multi-user.target
     echo -e "\e[1m\e[39m    journalctl -u subspace-farmer.service -f \n \e[0m"
 }
 uninstall() {
-sudo systemctl stop subspace-farmer.service
-sudo systemctl stop subspace-node.service
 sudo systemctl disable subspace-farmer.service
 sudo systemctl disable subspace-node.service
+sudo rm /etc/systemd/system/subspace-farmer.service /etc/systemd/system/subspace-node.service
 sudo rm /usr/local/bin/subspace-farmer /usr/local/bin/subspace-node 
 sudo rm -rf $HOME/subspace_adv
 echo "Done"
