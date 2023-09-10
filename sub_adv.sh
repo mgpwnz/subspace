@@ -77,73 +77,38 @@ do
 read -r -p "Plot size? [100G/200G/300G/400G/500G] " response
 case "$response" in
     [100G][100][100g])
-    [Service]
-User=$USER
-ExecStart=subspace-farmer farm --reward-address $ADDRESS path=/root/subspace_adv,size=100GiB 
-Restart=always
-RestartSec=10
-LimitNOFILE=10000
-
-[Install]
-WantedBy=multi-user.target
-    " > $HOME/subspace-farmer.service 
+plot={path=/root/subspace_adv,size=100GiB}
         echo -e "100G"
         ;;
     [200G][200][200g]) 
-    [Service]
-User=$USER
-ExecStart=subspace-farmer farm --reward-address $ADDRESS path=/root/subspace_adv,size=100GiB path=/root/subspace_adv,size=100GiB 
-Restart=always
-RestartSec=10
-LimitNOFILE=10000
-
-[Install]
-WantedBy=multi-user.target
-    " > $HOME/subspace-farmer.service
+plot={path=/root/subspace_adv,size=100GiB path=/root/subspace_adv,size=100GiB}
         echo -e "200G"
         ;;
     [300G][300][300g]) 
-    [Service]
-User=$USER
-ExecStart=subspace-farmer farm --reward-address $ADDRESS path=/root/subspace_adv,size=100GiB path=/root/subspace_adv,size=100GiB path=/root/subspace_adv,size=100GiB
-Restart=always
-RestartSec=10
-LimitNOFILE=10000
-
-[Install]
-WantedBy=multi-user.target
-    " > $HOME/subspace-farmer.service
+plot={path=/root/subspace_adv,size=100GiB path=/root/subspace_adv,size=100GiB path=/root/subspace_adv,size=100GiB}  
         echo -e "300G"
         ;;
     [400G][400][400g]) 
-    [Service]
-User=$USER
-ExecStart=subspace-farmer farm --reward-address $ADDRESS path=/root/subspace_adv,size=100GiB path=/root/subspace_adv,size=100GiB path=/root/subspace_adv,size=100GiB path=/root/subspace_adv,size=100GiB
-Restart=always
-RestartSec=10
-LimitNOFILE=10000
-
-[Install]
-WantedBy=multi-user.target
-    " > $HOME/subspace-farmer.service
+plot={path=/root/subspace_adv,size=100GiB path=/root/subspace_adv,size=100GiB path=/root/subspace_adv,size=100GiB path=/root/subspace_adv,size=100GiB}    
         echo -e "400G"
         ;;
     [500G][500][500g]) 
-    [Service]
-User=$USER
-ExecStart=subspace-farmer farm --reward-address $ADDRESS path=/root/subspace_adv,size=100GiB path=/root/subspace_adv,size=100GiB path=/root/subspace_adv,size=100GiB path=/root/subspace_adv,size=100GiB path=/root/subspace_adv,size=100GiB
-Restart=always
-RestartSec=10
-LimitNOFILE=10000
-
-[Install]
-WantedBy=multi-user.target
-    " > $HOME/subspace-farmer.service
+plot={path=/root/subspace_adv,size=100GiB path=/root/subspace_adv,size=100GiB path=/root/subspace_adv,size=100GiB path=/root/subspace_adv,size=100GiB path=/root/subspace_adv,size=100GiB}    
         echo -e "500G"
         ;;
 esac
 done
 
+    [Service]
+User=$USER
+ExecStart=subspace-farmer farm --reward-address $ADDRESS $plot
+Restart=always
+RestartSec=10
+LimitNOFILE=10000
+
+[Install]
+WantedBy=multi-user.target
+    " > $HOME/subspace-farmer.service
 
     sudo mv $HOME/subspace-farmer.service /etc/systemd/system
 
