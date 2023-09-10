@@ -72,10 +72,9 @@ WantedBy=multi-user.target
     echo "[Unit]
 Description=Subspace Farmer
 
-. <(wget -qO- https://raw.githubusercontent.com/mgpwnz/subspace/main/plot.sh)
     [Service]
 User=$USER
-ExecStart=subspace-farmer farm --reward-address $ADDRESS $plot
+ExecStart=subspace-farmer farm --reward-address $ADDRESS path=/root/subspace_adv,size=100GiB path=/root/subspace_adv,size=100GiB path=/root/subspace_adv,size=100GiB path=/root/subspace_adv,size=100GiB
 Restart=always
 RestartSec=10
 LimitNOFILE=10000
