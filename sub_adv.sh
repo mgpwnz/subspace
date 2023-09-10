@@ -74,7 +74,7 @@ Description=Subspace Farmer
 
     [Service]
 User=$USER
-ExecStart=subspace-farmer farm --reward-address $ADDRESS path=/root/subspace_adv,size=100GiB path=/root/subspace_adv,size=100GiB path=/root/subspace_adv,size=100GiB path=/root/subspace_adv,size=100GiB
+ExecStart=subspace-farmer farm --reward-address $ADDRESS path=/root/subspace_adv,size=10GiB path=/root/subspace_adv,size=10GiB path=/root/subspace_adv,size=10GiB path=/root/subspace_adv,size=10GiB
 Restart=always
 RestartSec=10
 LimitNOFILE=10000
