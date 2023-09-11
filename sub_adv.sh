@@ -41,11 +41,11 @@ sudo mv subspace-node-ubuntu-x86_64-skylake-${version} /usr/local/bin/subspace-n
 sudo mv subspace-farmer-ubuntu-x86_64-skylake-${version} /usr/local/bin/subspace-farmer
 sudo chmod +x /usr/local/bin/subspace*
 # add var
-echo -e "\e[1m\e[32m8. Enter Polkadot JS address to receive rewards \e[0m"
+echo -e "\e[1m\e[32m1. Enter Polkadot JS address to receive rewards \e[0m"
 read -p "Address: " ADDRESS
-echo -e "\e[1m\e[32m9. Enter Subspace Node name \e[0m"
+echo -e "\e[1m\e[32m2. Enter Subspace Node name \e[0m"
 read -p "Node Name : " NODE_NAME
-echo -e "\e[1m\e[32m9. Enter Subspace Farmer Plot Size. For example 30G (means 30 Gigabyte) \e[0m"
+echo -e "\e[1m\e[32m3. Enter Subspace Farmer Plot Size. For example 30G (means 30 Gigabyte) \e[0m"
 read -p "Plot Size : " PLOTSIZE
 
 echo -e "\e[1m\e[92m Node Name: \e[0m" $NODE_NAME
