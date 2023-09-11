@@ -2,10 +2,6 @@
 # Default variables
 function="install"
 version=gemini-3f-2023-sep-05
-plot1=5
-plot2=5
-plot3=10
-plot4=10
 # Options
 option_value(){ echo "$1" | sed -e 's%^--[^=]*=%%g; s%^-[^=]*=%%g'; }
 while test $# -gt 0; do
@@ -49,11 +45,14 @@ echo -e "\e[1m\e[32m8. Enter Polkadot JS address to receive rewards \e[0m"
 read -p "Address: " ADDRESS
 echo -e "\e[1m\e[32m9. Enter Subspace Node name \e[0m"
 read -p "Node Name : " NODE_NAME
+echo -e "\e[1m\e[32m9. Enter Subspace Farmer Plot Size. For example 30G (means 30 Gigabyte) \e[0m"
+read -p "Plot Size : " PLOTSIZE
 
 echo -e "\e[1m\e[92m Node Name: \e[0m" $NODE_NAME
 
 echo -e "\e[1m\e[92m Address:  \e[0m" $ADDRESS
 
+echo -e "\e[1m\e[92m Plot Size:  \e[0m" $PLOTSIZE
 sleep 1
 #create service node
     echo "[Unit]
@@ -78,7 +77,7 @@ Description=Subspace Farmer
 
     [Service]
 User=$USER
-ExecStart=subspace-farmer farm --reward-address $ADDRESS path=/root/subspace_adv,size=${plot1}GiB path=/root/subspace_adv,size=${plot2}GiB path=/root/subspace_adv,size=${plot3}GiB path=/root/subspace_adv,size=${plot4}GiB
+ExecStart=subspace-farmer farm --reward-address $ADDRESS path=/root/subspace_adv,size=$PLOTSIZE
 Restart=always
 RestartSec=10
 LimitNOFILE=10000
