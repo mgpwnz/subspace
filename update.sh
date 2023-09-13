@@ -10,6 +10,7 @@ case "$response" in
         . <(wget -qO- https://raw.githubusercontent.com/mgpwnz/subspace/main/sub_adv.sh) -up
         ;;
     *)
+        echo Update canceled !
         break
         ;;
 esac
@@ -23,6 +24,7 @@ case "$response" in
         . <(wget -qO- https://raw.githubusercontent.com/mgpwnz/subspace/main/subspace.sh) -up
         ;;
     *)
+        echo Update canceled !
         break
         ;;
 esac
@@ -36,8 +38,8 @@ case "$response" in
         . <(wget -qO- https://raw.githubusercontent.com/mgpwnz/subspace/main/subspace_cli.sh) -up
         ;;
     *)
+        echo Update canceled ! 
         break
         ;;
 esac
 fi
-echo done
