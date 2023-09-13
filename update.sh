@@ -1,8 +1,7 @@
 #!/bin/bash
 version=gemini-3f-2023-sep-11
 repo=v0.6.7-alpha
-while true
-do
+
 if [ -e /usr/local/bin/subspace-node ]; then
 echo  SUBSPACE Advanced
 read -r -p "Update node? [y/N] " response
@@ -12,7 +11,7 @@ case "$response" in
         ;;
     *)
         echo Update canceled !
-        break
+        return 0
         ;;
 esac
 fi
@@ -26,7 +25,7 @@ case "$response" in
         ;;
     *)
         echo Update canceled !
-        break
+        return 0
         ;;
 esac
 fi
@@ -40,8 +39,7 @@ case "$response" in
         ;;
     *)
         echo Update canceled ! 
-        break
+        return 0
         ;;
 esac
 fi
-done
