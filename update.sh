@@ -2,7 +2,7 @@
 version=gemini-3f-2023-sep-11
 repo=v0.6.7-alpha
 
-if [ -e /etc/systemd/system/subspace-node.servise ]; then
+if [ -e /usr/local/bin/subspace-node ]; then
 echo  adv
 fi
 
@@ -10,7 +10,7 @@ if [ -e $HOME/subspace/docker-compose-logs.yml ]; then
 echo docker
 fi
 
-if [ -e /etc/systemd/system/subspace.service ]; then
+if [ -e /usr/local/bin/pulsar ]; then
 echo Pulsar
 fi
 echo done
