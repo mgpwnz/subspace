@@ -112,7 +112,7 @@ sudo systemctl disable subspace-farmer.service
 sudo systemctl disable subspace-node.service
 sudo rm /etc/systemd/system/subspace-farmer.service /etc/systemd/system/subspace-node.service
 sudo rm /usr/local/bin/subspace-farmer /usr/local/bin/subspace-node 
-sudo rm -rf $HOME/subspace_adv $HOME/.locla/share/subspace-node/
+sudo rm -rf $HOME/subspace_adv $HOME/.local/share/subspace-node/
 echo "Done"
 cd $HOME
 }
