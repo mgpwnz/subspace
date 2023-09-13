@@ -60,7 +60,7 @@ Description=Subspace Node
 
 [Service]
 User=$USER
-ExecStart=subspace-node  --chain gemini-3f  --blocks-pruning 256 --execution wasm --state-pruning archive --validator --name '$NODE_NAME'
+ExecStart=subspace-node  --chain gemini-3f  --blocks-pruning 256 --execution wasm --state-pruning archive --validator --name '$NODE_NAME' --base-path path=/root/subspace_adv
 Restart=always
 RestartSec=10
 LimitNOFILE=10000
