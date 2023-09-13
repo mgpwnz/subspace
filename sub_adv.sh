@@ -60,7 +60,7 @@ Description=Subspace Node
 
 [Service]
 User=$USER
-ExecStart=subspace-node  --chain gemini-3f  --blocks-pruning 256 --execution wasm --state-pruning archive --validator --name '$NODE_NAME' --base-path path=/root/subspace_adv
+ExecStart=subspace-node  --chain gemini-3f  --blocks-pruning 256 --execution wasm --state-pruning archive --validator --name '$NODE_NAME' 
 Restart=always
 RestartSec=10
 LimitNOFILE=10000
@@ -112,7 +112,7 @@ sudo systemctl disable subspace-farmer.service
 sudo systemctl disable subspace-node.service
 sudo rm /etc/systemd/system/subspace-farmer.service /etc/systemd/system/subspace-node.service
 sudo rm /usr/local/bin/subspace-farmer /usr/local/bin/subspace-node 
-sudo rm -rf $HOME/subspace_adv
+sudo rm -rf $HOME/subspace_adv $HOME/.locla/share/subspace-node/
 echo "Done"
 cd $HOME
 }
