@@ -128,9 +128,6 @@ sudo chmod +x /usr/local/bin/subspace*
 sleep 1
 # Enabling services
     sudo systemctl daemon-reload
-    sudo systemctl enable subspace-farmer.service
-    sudo systemctl enable subspace-node.service
-
 # Starting services
     sudo systemctl restart subspace-node.service
     sudo systemctl restart subspace-farmer.service
