@@ -6,7 +6,7 @@ if [ -e /usr/local/bin/subspace-node ]; then
 echo  adv
 fi
 
-if [ -e $HOME/subspace/subspace/docker-compose.yml ]; then
+if [ -e $HOME/subspace/docker-compose.yml ]; then
 echo docker
 fi
 
