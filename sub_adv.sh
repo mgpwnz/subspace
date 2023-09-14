@@ -119,6 +119,9 @@ cd $HOME
 }
 update() {
 cd $HOME
+sudo apt update &> /dev/null
+sudo apt install wget -y &> /dev/null
+sudo apt-get install libgomp1 -y &> /dev/null
 #download cli
 wget https://github.com/subspace/subspace/releases/download/${version}/subspace-node-ubuntu-x86_64-skylake-${version} &> /dev/null
 wget https://github.com/subspace/subspace/releases/download/${version}/subspace-farmer-ubuntu-x86_64-skylake-${version} &> /dev/null
