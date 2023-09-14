@@ -31,6 +31,7 @@ sudo curl https://sh.rustup.rs -sSf | sh -s -- -y
 source $HOME/.cargo/env
 sleep 3
 sudo apt install wget -y &> /dev/null
+sudo apt-get install libgomp1 -y &> /dev/null
 cd $HOME
 mkdir subspace_adv
 #download binary
