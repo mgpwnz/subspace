@@ -103,7 +103,7 @@ WantedBy=multi-user.target
     echo -e "\e[1m\e[39m    journalctl -u subspace-node.service -f \n \e[0m" 
 
     echo -e "\e[1m\e[32mTo check the Subspace Farmer signed block logs: \e[0m" 
-    echo -e "\e[1m\e[39m    journalctl -u subspace-farmer.service -o cat | grep 'Successfully signed block' \n \e[0m" 
+    echo -e "\e[1m\e[39m    journalctl -u subspace-farmer.service -o cat | grep 'Successfully signed reward' \n \e[0m" 
 
     echo -e "\e[1m\e[32mTo check the Subspace Farmer default logs: \e[0m" 
     echo -e "\e[1m\e[39m    journalctl -u subspace-farmer.service -f \n \e[0m"
