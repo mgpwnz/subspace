@@ -35,11 +35,11 @@ sudo apt-get install libgomp1 -y &> /dev/null
 cd $HOME
 mkdir subspace_adv
 #download binary
-wget https://github.com/subspace/subspace/releases/download/${version}/subspace-node-ubuntu-x86_64-skylake-${version} &> /dev/null
-wget https://github.com/subspace/subspace/releases/download/${version}/subspace-farmer-ubuntu-x86_64-skylake-${version} &> /dev/null
+wget https://github.com/subspace/subspace/releases/download/${version}/subspace-node-ubuntu-x86_64-v2-${version} &> /dev/null
+wget https://github.com/subspace/subspace/releases/download/${version}/subspace-farmer-ubuntu-x86_64-v2-${version} &> /dev/null
 sleep 1
-sudo mv subspace-node-ubuntu-x86_64-skylake-${version} /usr/local/bin/subspace-node
-sudo mv subspace-farmer-ubuntu-x86_64-skylake-${version} /usr/local/bin/subspace-farmer
+sudo mv subspace-node-ubuntu-x86_64-v2-${version} /usr/local/bin/subspace-node
+sudo mv subspace-farmer-ubuntu-x86_64-v2-${version} /usr/local/bin/subspace-farmer
 sudo chmod +x /usr/local/bin/subspace*
 # add var
 echo -e "\e[1m\e[32m1. Enter Polkadot JS address to receive rewards \e[0m"
@@ -123,11 +123,11 @@ sudo apt update &> /dev/null
 sudo apt install wget -y &> /dev/null
 sudo apt-get install libgomp1 -y &> /dev/null
 #download cli
-wget https://github.com/subspace/subspace/releases/download/${version}/subspace-node-ubuntu-x86_64-skylake-${version} &> /dev/null
-wget https://github.com/subspace/subspace/releases/download/${version}/subspace-farmer-ubuntu-x86_64-skylake-${version} &> /dev/null
+wget https://github.com/subspace/subspace/releases/download/${version}/subspace-node-ubuntu-x86_64-v2-${version} &> /dev/null
+wget https://github.com/subspace/subspace/releases/download/${version}/subspace-farmer-ubuntu-x86_64-v2-${version} &> /dev/null
 sleep 1
-sudo mv subspace-node-ubuntu-x86_64-skylake-${version} /usr/local/bin/subspace-node
-sudo mv subspace-farmer-ubuntu-x86_64-skylake-${version} /usr/local/bin/subspace-farmer
+sudo mv subspace-node-ubuntu-x86_64-v2-${version} /usr/local/bin/subspace-node
+sudo mv subspace-farmer-ubuntu-x86_64-v2-${version} /usr/local/bin/subspace-farmer
 sudo chmod +x /usr/local/bin/subspace*
 sleep 1
 # Enabling services
