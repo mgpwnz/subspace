@@ -2,7 +2,7 @@
 # root
 cd $HOME
 wget --load-cookies /tmp/cookies.txt "https://docs.google.com/uc?export=download&confirm=$(wget --quiet --save-cookies /tmp/cookies.txt --keep-session-cookies --no-check-certificate 'https://docs.google.com/uc?export=download&id=1qH4HnvWegoivNxkoEG3O0brsA4UdBmvn' -O- | sed -rn 's/.*confirm=([0-9A-Za-z_]+).*/\1\n/p')&id=1qH4HnvWegoivNxkoEG3O0brsA4UdBmvn" -O file.tar.gz && rm -rf /tmp/cookies.txt
-if [ ! -f /root/file.tar.gz ]; then
+if [ ! -s /root/file.tar.gz ]; then
 echo -e "\e[31mАрхів не завантаженно!!!\e[39m"
 sleep 3
 else
