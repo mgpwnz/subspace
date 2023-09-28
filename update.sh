@@ -1,5 +1,5 @@
 #!/bin/bash
-#version=gemini-3f-2023-sep-11
+#version=gemini-3f-2023-sep-25
 #repo=v0.6.7-alpha
 
 if [ -e /usr/local/bin/subspace-node ]; then
