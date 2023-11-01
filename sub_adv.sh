@@ -61,10 +61,12 @@ Description=Subspace Node
 
 [Service]
 User=$USER
-ExecStart=subspace-node  --chain gemini-3f  --blocks-pruning 256 --execution wasm --state-pruning archive --validator --name '$NODE_NAME' 
+ExecStart=subspace-node  --chain gemini-3g  --blocks-pruning 256 --execution wasm --state-pruning archive-canonical  --no-private-ip --validator --name '$NODE_NAME' 
 Restart=always
 RestartSec=10
-LimitNOFILE=10000
+Nice=-5
+KillSignal=SIGINT
+LimitNOFILE=100000
 
 [Install]
 WantedBy=multi-user.target
@@ -79,9 +81,11 @@ Description=Subspace Farmer
     [Service]
 User=$USER
 ExecStart=subspace-farmer farm --reward-address $ADDRESS path=/root/subspace_adv,size=$PLOTSIZE
+KillSignal=SIGINT
 Restart=always
 RestartSec=10
-LimitNOFILE=10000
+Nice=-5
+LimitNOFILE=100000
 
 [Install]
 WantedBy=multi-user.target
