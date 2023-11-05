@@ -1,6 +1,6 @@
 #!/bin/bash
 # Default variables
-version="gemini-3g-2023-oct-31"
+version="gemini-3g-2023-nov-03"
 function="install"
 # Options
 option_value(){ echo "$1" | sed -e 's%^--[^=]*=%%g; s%^-[^=]*=%%g'; }
@@ -91,7 +91,7 @@ services:
     restart: unless-stopped
     command:
       [
-        "--chain", "gemini-3f",
+        "--chain", "gemini-3g",
         "--base-path", "/var/subspace",
         "--execution", "wasm",
         "--blocks-pruning", "256",
@@ -155,7 +155,7 @@ services:
     restart: unless-stopped
     command:
       [
-        "--chain", "gemini-3f",
+        "--chain", "gemini-3g",
         "--base-path", "/var/subspace",
         "--execution", "wasm",
         "--blocks-pruning", "256",

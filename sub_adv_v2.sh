@@ -1,7 +1,7 @@
 #!/bin/bash
 # Default variables
 function="install"
-version=gemini-3g-2023-oct-31
+version=gemini-3g-2023-nov-03
 # Options
 option_value(){ echo "$1" | sed -e 's%^--[^=]*=%%g; s%^-[^=]*=%%g'; }
 while test $# -gt 0; do
@@ -61,7 +61,7 @@ Description=Subspace Node
 
 [Service]
 User=$USER
-ExecStart=subspace-node  --chain gemini-3f  --blocks-pruning 256 --execution wasm --state-pruning archive --validator --name '$NODE_NAME' 
+ExecStart=subspace-node  --chain gemini-3g  --blocks-pruning 256 --execution wasm --state-pruning archive --validator --name '$NODE_NAME' 
 Restart=always
 RestartSec=10
 LimitNOFILE=10000
