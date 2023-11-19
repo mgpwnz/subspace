@@ -114,13 +114,22 @@ WantedBy=multi-user.target
     echo -e "\e[1m\e[39m    journalctl -u subspace-farmer.service -f \n \e[0m"
 }
 uninstall() {
-sudo systemctl disable subspace-farmer.service
-sudo systemctl disable subspace-node.service
-sudo rm /etc/systemd/system/subspace-farmer.service /etc/systemd/system/subspace-node.service
-sudo rm /usr/local/bin/subspace-farmer /usr/local/bin/subspace-node 
-sudo rm -rf $HOME/subspace_adv $HOME/.local/share/subspace-node/
-echo "Done"
-cd $HOME
+read -r -p "You really want to delete the node? [y/N] " response
+case "$response" in
+    [yY][eE][sS]|[yY]) 
+    sudo systemctl disable subspace-farmer.service
+    sudo systemctl disable subspace-node.service
+    sudo rm /etc/systemd/system/subspace-farmer.service /etc/systemd/system/subspace-node.service
+    sudo rm /usr/local/bin/subspace-farmer /usr/local/bin/subspace-node 
+    sudo rm -rf $HOME/subspace_adv $HOME/.local/share/subspace-node/
+    echo "Done"
+    cd $HOME
+    ;;
+    *)
+        echo Сanceled
+        return 0
+        ;;
+esac
 }
 update() {
 cd $HOME
