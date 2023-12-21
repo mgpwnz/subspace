@@ -6,7 +6,10 @@ current_step=0
 function progress_bar() {
   local progress=$((current_step * 100 / total_steps))
   local bar_size=$((progress / 2))
-  printf "[%-50s] %d%%\r" $(printf "#%.0s" $(seq 1 $bar_size)) $progress
+  local color='\e[32m'  # ANSI-код для зеленого кольору
+  local reset='\e[0m'   # ANSI-код для скидання кольору
+
+  printf "[${color}%-50s${reset}] ${color}%d%%${reset}\r" $(printf "#%.0s" $(seq 1 $bar_size)) $progress
 }
 
 # Ваші команди по крокам
