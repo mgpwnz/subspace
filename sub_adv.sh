@@ -2,7 +2,7 @@
 # Default variables
 function="install"
 version=gemini-3g-2024-jan-08
-#version=gemini-3g-2023-dec-15
+#version=gemini-3g-2024-jan-03
 # Options
 option_value(){ echo "$1" | sed -e 's%^--[^=]*=%%g; s%^-[^=]*=%%g'; }
 while test $# -gt 0; do
@@ -134,8 +134,8 @@ esac
 update() {
 cd $HOME
 sudo apt update &> /dev/null
-sudo apt install wget -y &> /dev/null
-sudo apt-get install libgomp1 -y &> /dev/null
+#sudo apt install wget -y &> /dev/null
+#sudo apt-get install libgomp1 -y &> /dev/null
 #download cli
 wget https://github.com/subspace/subspace/releases/download/${version}/subspace-node-ubuntu-x86_64-skylake-${version} &> /dev/null
 wget https://github.com/subspace/subspace/releases/download/${version}/subspace-farmer-ubuntu-x86_64-skylake-${version} &> /dev/null

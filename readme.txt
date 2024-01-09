@@ -1,1 +1,1 @@
-Subspace cli & docker ver.
+Subspace cli ver. + backup 3g 800k+ gc
