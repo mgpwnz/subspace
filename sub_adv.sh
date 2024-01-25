@@ -62,7 +62,7 @@ Description=Subspace Node
 
 [Service]
 User=$USER
-ExecStart=subspace-node  --chain gemini-3g  --blocks-pruning 256 --execution wasm --state-pruning archive-canonical  --no-private-ip --validator --name '$NODE_NAME' 
+ExecStart=subspace-node  --chain gemini-3g --port=30444 --blocks-pruning 256 --execution wasm --state-pruning archive-canonical  --no-private-ip --validator --name '$NODE_NAME' 
 Restart=always
 RestartSec=10
 Nice=-5
