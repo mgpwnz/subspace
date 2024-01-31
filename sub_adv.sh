@@ -61,7 +61,7 @@ Description=Subspace Node
 
 [Service]
 User=$USER
-ExecStart=subspace-node  run --chain gemini-3h  --blocks-pruning 256 --state-pruning archive-canonical  --no-private-ip --farmer --name '$NODE_NAME' 
+ExecStart=subspace-node  run --chain gemini-3h --base-path $HOME/subspace_adv --blocks-pruning 256 --state-pruning archive-canonical  --no-private-ip --farmer --name '$NODE_NAME' 
 Restart=always
 RestartSec=10
 Nice=-5
