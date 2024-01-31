@@ -1,8 +1,7 @@
 #!/bin/bash
 # Default variables
 function="install"
-version=gemini-3g-2024-jan-31
-#version=gemini-3g-2024-jan-03
+version=gemini-3h-2024-jan-31-2
 # Options
 option_value(){ echo "$1" | sed -e 's%^--[^=]*=%%g; s%^-[^=]*=%%g'; }
 while test $# -gt 0; do
@@ -62,7 +61,7 @@ Description=Subspace Node
 
 [Service]
 User=$USER
-ExecStart=subspace-node  --chain gemini-3g  --blocks-pruning 256 --execution wasm --state-pruning archive-canonical  --no-private-ip --validator --name '$NODE_NAME' 
+ExecStart=subspace-node  run --chain gemini-3h  --blocks-pruning 256 --state-pruning archive-canonical  --no-private-ip --farmer --name '$NODE_NAME' 
 Restart=always
 RestartSec=10
 Nice=-5
@@ -81,7 +80,7 @@ Description=Subspace Farmer
 
     [Service]
 User=$USER
-ExecStart=subspace-farmer farm --farm-during-initial-plotting true --reward-address $ADDRESS path=/root/subspace_adv,size=$PLOTSIZE
+ExecStart=subspace-farmer farm --reward-address $ADDRESS path=/root/subspace_adv,size=$PLOTSIZE
 KillSignal=SIGINT
 Restart=always
 RestartSec=10
