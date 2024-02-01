@@ -16,7 +16,7 @@ while test $# -gt 0; do
             shift
             ;;
 	    -up|--update)
-            function="new"
+            function="update"
             shift
             ;;
         *|--)
