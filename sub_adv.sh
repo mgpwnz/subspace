@@ -1,8 +1,7 @@
 #!/bin/bash
 # Default variables
 function="install"
-version=gemini-3h-2024-feb-01
-#version=gemini-3g-2024-feb-01
+version=gemini-3h-2024-feb-05
 # Options
 option_value(){ echo "$1" | sed -e 's%^--[^=]*=%%g; s%^-[^=]*=%%g'; }
 while test $# -gt 0; do
@@ -81,7 +80,7 @@ Description=Subspace Farmer
 
     [Service]
 User=$USER
-ExecStart=subspace-farmer farm --farm-during-initial-plotting true --reward-address $ADDRESS path=/root/subspace_adv,size=$PLOTSIZE
+ExecStart=subspace-farmer farm --reward-address $ADDRESS path=/root/subspace_adv,size=$PLOTSIZE
 KillSignal=SIGINT
 Restart=always
 RestartSec=10
@@ -153,10 +152,10 @@ sleep 1
 # Starting services
     sudo systemctl restart subspace-node.service
     sudo systemctl restart subspace-farmer.service
-#add new options gemini-3g-2023-dec-20 
-#    sed -i '/--farm-during-initial-plotting/ { /true/! s/--farm-during-initial-plotting/--farm-during-initial-plotting true/ }' /etc/systemd/system/subspace-farmer.service
-#    sudo systemctl daemon-reload
-#   systemctl restart subspace-farmer.service
+#add new options gemini-3h-2024-feb-05
+sudo sed -i 's/--farm-during-initial-plotting true//' /etc/systemd/system/subspace-farmer.service
+sudo systemctl daemon-reload
+sudo systemctl restart subspace-farmer.service
 echo -e "Your subspace node \e[32mUpdate\e[39m!"
 cd $HOME
 }
