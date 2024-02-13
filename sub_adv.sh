@@ -153,9 +153,9 @@ sleep 1
     sudo systemctl restart subspace-node.service
     sudo systemctl restart subspace-farmer.service
 #add new options gemini-3h-2024-feb-05
-sudo sed -i 's/--farm-during-initial-plotting true//' /etc/systemd/system/subspace-farmer.service
-sudo systemctl daemon-reload
-sudo systemctl restart subspace-farmer.service
+#sudo sed -i 's/--farm-during-initial-plotting true//' /etc/systemd/system/subspace-farmer.service
+#sudo systemctl daemon-reload
+#sudo systemctl restart subspace-farmer.service
 echo -e "Your subspace node \e[32mUpdate\e[39m!"
 cd $HOME
 }
