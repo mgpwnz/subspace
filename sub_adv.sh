@@ -1,8 +1,8 @@
 #!/bin/bash
 # Default variables
 function="install"
-#new version march 25
-version=gemini-3h-2024-mar-29
+#new version
+version=gemini-3h-2024-apr-24
 # Options
 option_value(){ echo "$1" | sed -e 's%^--[^=]*=%%g; s%^-[^=]*=%%g'; }
 while test $# -gt 0; do
