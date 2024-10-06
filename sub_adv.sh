@@ -132,9 +132,6 @@ case "$response" in
         ;;
 esac
 }
-new(){
-echo "3h update is not possible. If you have a node from the 3g network, you need to delete the old version!"
-}
 
 update() {
 cd $HOME
@@ -142,8 +139,8 @@ sudo apt update &> /dev/null
 #sudo apt install wget -y &> /dev/null
 #sudo apt-get install libgomp1 -y &> /dev/null
 #download cli
-wget https://github.com/subspace/subspace/releases/download/${version}/subspace-node-ubuntu-x86_64-skylake-${version} &> /dev/null
-wget https://github.com/subspace/subspace/releases/download/${version}/subspace-farmer-ubuntu-x86_64-skylake-${version} &> /dev/null
+wget https://github.com/autonomys/subspace/releases/download/${version}/subspace-node-ubuntu-x86_64-skylake-${version} &> /dev/null
+wget https://github.com/autonomys/subspace/releases/download/${version}/subspace-farmer-ubuntu-x86_64-skylake-${version} &> /dev/null
 sleep 1
 sudo mv subspace-node-ubuntu-x86_64-skylake-${version} /usr/local/bin/subspace-node
 sudo mv subspace-farmer-ubuntu-x86_64-skylake-${version} /usr/local/bin/subspace-farmer
@@ -155,7 +152,7 @@ sleep 1
     sudo systemctl restart subspace-node.service
     sudo systemctl restart subspace-farmer.service
 #add new options gemini-3h-2024-feb-05
-sudo sed -i 's/--farm-during-initial-plotting true//' /etc/systemd/system/subspace-farmer.service
+#sudo sed -i 's/--farm-during-initial-plotting true//' /etc/systemd/system/subspace-farmer.service
 #sudo systemctl daemon-reload
 #sudo systemctl restart subspace-farmer.service
 echo -e "Your subspace node \e[32mUpdate\e[39m!"
