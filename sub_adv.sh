@@ -2,7 +2,8 @@
 # Default variables
 function="install"
 #new version
-version=gemini-3h-2024-jun-11
+version=$(wget -qO- https://api.github.com/repos/autonomys/subspace/releases/latest | jq -r ".tag_name")
+echo $version
 # Options
 option_value(){ echo "$1" | sed -e 's%^--[^=]*=%%g; s%^-[^=]*=%%g'; }
 while test $# -gt 0; do
@@ -36,8 +37,8 @@ sudo apt-get install libgomp1 -y &> /dev/null
 cd $HOME
 mkdir subspace_adv
 #download binary
-wget https://github.com/subspace/subspace/releases/download/${version}/subspace-node-ubuntu-x86_64-skylake-${version} &> /dev/null
-wget https://github.com/subspace/subspace/releases/download/${version}/subspace-farmer-ubuntu-x86_64-skylake-${version} &> /dev/null
+wget https://github.com/autonomys/subspace/releases/download/${version}/subspace-node-ubuntu-x86_64-skylake-${version} &> /dev/null
+wget https://github.com/autonomys/subspace/releases/download/${version}/subspace-farmer-ubuntu-x86_64-skylake-${version} &> /dev/null
 sleep 1
 sudo mv subspace-node-ubuntu-x86_64-skylake-${version} /usr/local/bin/subspace-node
 sudo mv subspace-farmer-ubuntu-x86_64-skylake-${version} /usr/local/bin/subspace-farmer
