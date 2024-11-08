@@ -63,7 +63,7 @@ Description=Subspace Node
 
 [Service]
 User=$USER
-ExecStart=subspace-node  run --chain taurus --base-path $HOME/subspace_adv --farmer --name '$NODE_NAME' 
+ExecStart=subspace-node  run --chain mainnet --base-path $HOME/subspace_adv --farmer --name '$NODE_NAME' 
 Restart=always
 RestartSec=10
 Nice=-5
