@@ -3,7 +3,7 @@
 function="install"
 #new version
 version=$(wget -qO- https://api.github.com/repos/autonomys/subspace/releases/latest | jq -r ".tag_name")
-echo $version
+#echo $version
 # Options
 option_value(){ echo "$1" | sed -e 's%^--[^=]*=%%g; s%^-[^=]*=%%g'; }
 while test $# -gt 0; do
@@ -26,6 +26,7 @@ while test $# -gt 0; do
 	esac
 done
 install() {
+echo $version
 sudo apt update &> /dev/null
 apt-get install protobuf-compiler -y
 apt-get update && DEBIAN_FRONTEND=noninteractive TZ=Etc/UTC apt-get install -y --no-install-recommends tzdata git ca-certificates curl build-essential libssl-dev pkg-config libclang-dev cmake jq
@@ -135,6 +136,7 @@ esac
 
 update() {
 cd $HOME
+echo $version
 sudo apt update &> /dev/null
 #sudo apt install wget -y &> /dev/null
 #sudo apt-get install libgomp1 -y &> /dev/null
